@@ -6,15 +6,21 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import com.example.mementomori.screen.MainChart
+import com.example.mementomori.screen.UserDataViewModel
 import com.example.mementomori.ui.theme.MementoMoriTheme
 
 class MainActivity : ComponentActivity() {
+    private lateinit var mainVm: MainViewModel
+    private lateinit var userDataVm: UserDataViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        this.userDataVm = UserDataViewModel()
+        this.mainVm = MainViewModel(userDataVm)
+
         setContent {
             MementoMoriTheme {
                 // A surface container using the 'background' color from the theme
@@ -22,7 +28,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    Main(mainVm)
                 }
             }
         }
@@ -30,14 +36,14 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun Main(mainVm: MainViewModel) {
+    MainChart(mainVm)
 }
-
+/*
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     MementoMoriTheme {
-        Greeting("Android")
+        Greeting()
     }
-}
+}*/
