@@ -26,6 +26,15 @@ private val DarkColorScheme = CustomColors(
     main_900 = main_900,
     main_000 = main_000,
 
+    /** Custom */
+    chart_1 = chart_1,
+    chart_2 = chart_2,
+    chart_3 = chart_3,
+    chart_4 = chart_4,
+    chart_5 = chart_5,
+    chart_6 = chart_6,
+    chart_x = chart_x,
+
     focusLine = none,
     iconButton = none,
     txtIconBtn = none,
@@ -67,6 +76,15 @@ private val LightColorScheme = CustomColors(
     main_800 = main_800,
     main_900 = main_900,
     main_000 = main_000,
+
+    /** Custom */
+    chart_1 = chart_1,
+    chart_2 = chart_2,
+    chart_3 = chart_3,
+    chart_4 = chart_4,
+    chart_5 = chart_5,
+    chart_6 = chart_6,
+    chart_x = chart_x,
 
     focusLine = none,
     iconButton = none,
