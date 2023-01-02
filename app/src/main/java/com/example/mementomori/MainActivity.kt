@@ -8,8 +8,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.mementomori.screen.MainChart
-import com.example.mementomori.screen.UserDataViewModel
+import com.example.mementomori.screen.mainChart.MainChart
+import com.example.mementomori.screen.mainChart.UserDataViewModel
 import com.example.mementomori.ui.theme.MementoMoriTheme
 
 class MainActivity : ComponentActivity() {
