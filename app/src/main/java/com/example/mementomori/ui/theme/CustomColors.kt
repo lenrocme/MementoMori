@@ -4,6 +4,7 @@ import androidx.compose.material.Colors
 import androidx.compose.ui.graphics.Color
 
 data class CustomColors(
+    val none: Color,
     val colorScheme: Colors,
 
     val main_fff: Color,

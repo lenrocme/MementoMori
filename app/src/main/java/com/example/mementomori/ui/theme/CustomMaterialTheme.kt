@@ -11,6 +11,7 @@ import androidx.compose.material.MaterialTheme
 val LocalColors = staticCompositionLocalOf { LightColorScheme }
 
 private val DarkColorScheme = CustomColors(
+    none = none,
     colorScheme = lightColors(),
 
     main_fff = main_fff,
@@ -38,7 +39,7 @@ private val DarkColorScheme = CustomColors(
 
     bgTaxClass = none,
     bgTaxClassSelect = none,
-    bg_card = none,
+    bg_card = main_300,
     bg_modal = modalTransBground,
     /**
      * Font colors
@@ -52,6 +53,7 @@ private val DarkColorScheme = CustomColors(
 )
 
 private val LightColorScheme = CustomColors(
+    none = none,
     colorScheme = lightColors(),
 
     main_fff = main_fff,
@@ -79,7 +81,7 @@ private val LightColorScheme = CustomColors(
 
     bgTaxClass = none,
     bgTaxClassSelect = none,
-    bg_card = none,
+    bg_card = main_300,
     bg_modal = modalTransBground,
     /**
      * Font colors

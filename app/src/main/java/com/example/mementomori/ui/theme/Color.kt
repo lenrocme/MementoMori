@@ -29,7 +29,7 @@ val main_700 = Color(0xFF212C3C)
 val main_800 = Color(0xFF111A2E)
 val main_900 = Color(0xFF0E111A)
 val main_000 = Color(0xFF000000)
-var modalTransBground = Color(0x70575757)
+var modalTransBground = Color(0xFF575757)
 
 /**
  * Font colors light
