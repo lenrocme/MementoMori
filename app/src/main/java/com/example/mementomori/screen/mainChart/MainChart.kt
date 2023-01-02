@@ -3,11 +3,17 @@ package com.example.mementomori.screen.mainChart
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -30,9 +36,26 @@ private const val itemPerRow = 15
 
 @Composable
 fun MainChart(mainVm: MainViewModel) {
-    Box(modifier = Modifier,
+    Box(modifier = Modifier
+        .fillMaxSize(),
         content = {
             Chart(mainVm)
+
+            FloatingActionButton(
+                modifier = Modifier
+                    .padding(all = 16.dp)
+                    .align(alignment = Alignment.BottomEnd),
+                shape = MaterialTheme.shapes.small.copy(CornerSize(percent = 50)),
+                onClick = {
+                    mainVm.userInputVm.isModalVisible = true
+                    //Toast.makeText(contextForToast, "Click", Toast.LENGTH_SHORT).show()
+                }) {
+                Icon(
+                    imageVector = Icons.Filled.Edit,
+                    contentDescription = "Add"
+                )
+            }
+
             if (mainVm.userInputVm.isModalVisible)
                 ModalUserDataInput(mainVm)
         }

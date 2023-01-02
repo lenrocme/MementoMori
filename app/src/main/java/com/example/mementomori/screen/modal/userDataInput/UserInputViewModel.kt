@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
 class UserInputViewModel: ViewModel() {
-    var isModalVisible: Boolean by mutableStateOf(true)
+    var isModalVisible: Boolean by mutableStateOf(false)
     var bornYear: String by mutableStateOf("1980")
     var bornMonth: String by mutableStateOf("01")
     var country: String by mutableStateOf("Afghanistan")
