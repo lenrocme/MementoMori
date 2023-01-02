@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 
 // Set of Material typography styles to start with
@@ -55,7 +56,17 @@ val Typography.UserInput: TextStyle
         return  TextStyle(
             fontFamily = FontFamily.Default,
             fontWeight = FontWeight.Bold,
-            fontSize = 16.sp,
+            fontSize = 20.sp,
             color = MaterialTheme.myColors.main_000,
+        )
+    }
+
+val Typography.Checkbox: TextStyle
+    @Composable
+    get() {
+        return  TextStyle(
+            fontFamily = FontFamily.Default,
+            fontWeight = FontWeight.Normal,
+            fontSize = 16.sp,
         )
     }
