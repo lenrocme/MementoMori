@@ -8,21 +8,24 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.mementomori.screen.MainChart
-import com.example.mementomori.screen.UserDataViewModel
-import com.example.mementomori.ui.theme.MementoMoriTheme
+import com.example.mementomori.screen.mainChart.MainChart
+import com.example.mementomori.screen.mainChart.UserDataViewModel
+import com.example.mementomori.screen.modal.userDataInput.UserInputViewModel
+import com.example.mementomori.ui.theme.CustomMaterialTheme
 
 class MainActivity : ComponentActivity() {
     private lateinit var mainVm: MainViewModel
     private lateinit var userDataVm: UserDataViewModel
+    private lateinit var userInputVm: UserInputViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.userDataVm = UserDataViewModel()
-        this.mainVm = MainViewModel(userDataVm)
+        this.userInputVm = UserInputViewModel()
+        this.mainVm = MainViewModel(userDataVm, userInputVm)
 
         setContent {
-            MementoMoriTheme {
+            CustomMaterialTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),

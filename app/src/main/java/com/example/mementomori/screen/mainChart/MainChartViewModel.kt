@@ -1,4 +1,4 @@
-package com.example.mementomori.screen
+package com.example.mementomori.screen.mainChart
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

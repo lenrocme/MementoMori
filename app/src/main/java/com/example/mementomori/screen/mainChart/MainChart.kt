@@ -1,4 +1,4 @@
-package com.example.mementomori.screen
+package com.example.mementomori.screen.mainChart
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -16,6 +16,7 @@ import com.example.mementomori.MainViewModel
 import com.example.mementomori.helper.percentWidth
 import com.example.mementomori.R
 import com.example.mementomori.data.const.AgeGroups
+import com.example.mementomori.screen.modal.userDataInput.ModalUserDataInput
 
 /*
 @Preview(showBackground = true)
@@ -29,28 +30,40 @@ private const val itemPerRow = 15
 
 @Composable
 fun MainChart(mainVm: MainViewModel) {
-    val months = 12*80
+    Box(modifier = Modifier,
+        content = {
+            Chart(mainVm)
+            if (mainVm.userInputVm.isModalVisible)
+                ModalUserDataInput(mainVm)
+        }
+    )
+}
+
+@Composable
+fun Chart(mainVm: MainViewModel, countMonths: Int = 12 * 80) {
+    var months = countMonths
     var countMonth = 0
     val state = rememberScrollState()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(state),
         content = {
-        for (row in 0 until months / itemPerRow){
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-            ){
-                for (month in 1..itemPerRow){
-                    countMonth++
-                    ChartItem(mainVm, countMonth)
+            for (row in 0 until months / itemPerRow){
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                ){
+                    for (month in 1..itemPerRow){
+                        countMonth++
+                        ChartItem(mainVm, countMonth)
+                    }
                 }
+                Spacer(Modifier.height(3.dp))
             }
-            Spacer(Modifier.height(3.dp))
-        }
-    })
+        })
 }
 
 @Composable
