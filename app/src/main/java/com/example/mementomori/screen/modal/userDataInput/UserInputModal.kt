@@ -182,6 +182,55 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
+                                .background(color = Color.Green),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .width(percentWidth(.38f)),
+                                verticalAlignment = Alignment.CenterVertically,
+                                content = {
+                                    RadioButton(
+                                        selected = mainVm.userInputVm.isMale,
+                                        onClick = { mainVm.userInputVm.isMale = true }
+                                    )
+                                    Text(
+                                        text = "Male",
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .clickable(
+                                                interactionSource = MutableInteractionSource(),
+                                                indication = null){
+                                                mainVm.userInputVm.isMale = true
+                                            }
+                                    )
+                                }
+                            )
+                            Row(
+                                modifier = Modifier
+                                    .width(percentWidth(.38f)),
+                                verticalAlignment = Alignment.CenterVertically,
+                                content = {
+                                    RadioButton(
+                                        selected = !mainVm.userInputVm.isMale,
+                                        onClick = { mainVm.userInputVm.isMale = false }
+                                    )
+                                    Text(
+                                        text = "Female",
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .clickable(
+                                                interactionSource = MutableInteractionSource(),
+                                                indication = null){
+                                                    mainVm.userInputVm.isMale = false
+                                            }
+                                    )
+                                }
+                            )
+                        }
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
                                 .background(color = Color.Red),
                             //horizontalArrangement = Arrangement.SpaceBetween,
                         ) {

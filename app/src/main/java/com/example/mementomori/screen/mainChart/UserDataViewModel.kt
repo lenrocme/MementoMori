@@ -6,5 +6,5 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
 class UserDataViewModel: ViewModel() {
-    var userOldMonths: Int by mutableStateOf(403)
+    var userOldMonths: Int by mutableStateOf(903)
 }
