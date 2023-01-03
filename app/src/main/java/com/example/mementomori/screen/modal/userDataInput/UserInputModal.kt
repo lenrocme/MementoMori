@@ -117,6 +117,7 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                                 onClick = {
                                                     mainVm.userInputVm.bornMonth = selectionOption
                                                     expandMonthsDd = false
+                                                    mainVm.userDataVM.setData(mainVm.userInputVm)
                                                 }
                                             ) {
                                                 Text(text = selectionOption)
@@ -169,6 +170,7 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                                 onClick = {
                                                     mainVm.userInputVm.bornYear = selectionOption
                                                     expandYearDd = false
+                                                    mainVm.userDataVM.setData(mainVm.userInputVm)
                                                 }
                                             ) {
                                                 Text(text = selectionOption)
@@ -195,7 +197,7 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                         selected = mainVm.userInputVm.isMale,
                                         onClick = {
                                             mainVm.userInputVm.isMale = true
-                                            mainVm.userDataVM.calcMonthsLifeExpect(mainVm.userInputVm)
+                                            mainVm.userDataVM.setData(mainVm.userInputVm)
                                         }
                                     )
                                     Text(
@@ -206,7 +208,7 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                                 interactionSource = MutableInteractionSource(),
                                                 indication = null){
                                                     mainVm.userInputVm.isMale = true
-                                                    mainVm.userDataVM.calcMonthsLifeExpect(mainVm.userInputVm)
+                                                    mainVm.userDataVM.setData(mainVm.userInputVm)
                                                 }
                                     )
                                 }
@@ -220,7 +222,7 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                         selected = !mainVm.userInputVm.isMale,
                                         onClick = {
                                             mainVm.userInputVm.isMale = false
-                                            mainVm.userDataVM.calcMonthsLifeExpect(mainVm.userInputVm)
+                                            mainVm.userDataVM.setData(mainVm.userInputVm)
                                         }
                                     )
                                     Text(
@@ -231,7 +233,7 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                                 interactionSource = MutableInteractionSource(),
                                                 indication = null){
                                                     mainVm.userInputVm.isMale = false
-                                                    mainVm.userDataVM.calcMonthsLifeExpect(mainVm.userInputVm)
+                                                    mainVm.userDataVM.setData(mainVm.userInputVm)
                                                 }
                                     )
                                 }
@@ -283,7 +285,7 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                                 onClick = {
                                                     mainVm.userInputVm.country = selectionOption
                                                     expandCountryDd = false
-                                                    mainVm.userDataVM.calcMonthsLifeExpect(mainVm.userInputVm)
+                                                    mainVm.userDataVM.setData(mainVm.userInputVm)
                                                 }
                                             ) {
                                                 Text(text = selectionOption)
@@ -306,7 +308,7 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                 checked = mainVm.userInputVm.isSmoker,
                                 onCheckedChange = {
                                     mainVm.userInputVm.isSmoker = it
-                                    mainVm.userDataVM.calcMonthsLifeExpect(mainVm.userInputVm)
+                                    mainVm.userDataVM.setData(mainVm.userInputVm)
                                 },
                                 colors = CheckboxDefaults.colors(
                                     checkedColor = MaterialTheme.myColors.checkedCheckbox,
@@ -323,7 +325,7 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                     )
                                     {
                                         mainVm.userInputVm.isSmoker = !mainVm.userInputVm.isSmoker
-                                        mainVm.userDataVM.calcMonthsLifeExpect(mainVm.userInputVm)
+                                        mainVm.userDataVM.setData(mainVm.userInputVm)
                                     },
                                 style = MaterialTheme.typography.Checkbox,
                                 color = if (mainVm.userInputVm.isSmoker)

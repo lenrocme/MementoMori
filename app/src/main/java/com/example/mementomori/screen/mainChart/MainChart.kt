@@ -7,7 +7,6 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.FloatingActionButton
@@ -23,6 +22,7 @@ import com.example.mementomori.helper.percentWidth
 import com.example.mementomori.R
 import com.example.mementomori.data.const.AgeGroups
 import com.example.mementomori.screen.modal.userDataInput.ModalUserDataInput
+import com.example.mementomori.ui.theme.myColors
 
 /*
 @Preview(showBackground = true)
@@ -48,14 +48,12 @@ fun MainChart(mainVm: MainViewModel) {
                 shape = MaterialTheme.shapes.small.copy(CornerSize(percent = 50)),
                 onClick = {
                     mainVm.userInputVm.isModalVisible = true
-                    //Toast.makeText(contextForToast, "Click", Toast.LENGTH_SHORT).show()
                 }) {
                 Icon(
                     imageVector = Icons.Filled.Edit,
                     contentDescription = "Add"
                 )
             }
-
             if (mainVm.userInputVm.isModalVisible)
                 ModalUserDataInput(mainVm)
         }
@@ -64,7 +62,6 @@ fun MainChart(mainVm: MainViewModel) {
 
 @Composable
 fun Chart(mainVm: MainViewModel, countMonths: Int = 12 * 80) {
-    var months = countMonths
     var countMonth = 0
     val state = rememberScrollState()
 
@@ -73,14 +70,16 @@ fun Chart(mainVm: MainViewModel, countMonths: Int = 12 * 80) {
             .fillMaxSize()
             .verticalScroll(state),
         content = {
-            for (row in 0 until months / itemPerRow){
+            for (row in 0 until mainVm.userDataVM.userLifeExpectation / itemPerRow){
                 Row(
                     modifier = Modifier
                         .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
+                    horizontalArrangement = Arrangement.Start,
                 ){
                     for (month in 1..itemPerRow){
                         countMonth++
+                        if(mainVm.userDataVM.userLifeExpectation < countMonth)
+                            break
                         ChartItem(mainVm, countMonth)
                     }
                 }
@@ -90,29 +89,30 @@ fun Chart(mainVm: MainViewModel, countMonths: Int = 12 * 80) {
 }
 
 @Composable
-fun ChartItem(mainVm: MainViewModel, month: Int) {
+fun ChartItem(mainVm: MainViewModel, itemMonth: Int) {
     val sizeItem = 100 / itemPerRow / 100
     Box(
         modifier = Modifier
-            .background(color = getColorBgForItemByAgeGroup(mainVm.ageGroup, month)),
+            .background(color = getColorBgForItemByAgeGroup(mainVm.ageGroup, itemMonth)),
         content = {
             Icon(
                 modifier = Modifier
-                    .size(percentWidth(1f) / itemPerRow - 1.dp),
+                    .size(percentWidth(1f) / itemPerRow
+                    ),
                 contentDescription = "Clear",
                 painter = painterResource(id = R.drawable.leaf_svgrepo_com),
-                tint = if (month % 12 == 0)
+                tint = if (itemMonth % 12 == 0)
                     Color.Red
                 else
                     Color.Blue,
             )
-            if (mainVm.userDataVM.userOldMonths > month) {
+            if (mainVm.userDataVM.userOldMonths > itemMonth) {
                 Icon(
                     Icons.Default.Clear,
                     modifier = Modifier
                         .size(percentWidth(1f) / itemPerRow - 1.dp),
                     contentDescription = "Clear",
-                    tint = Color.Red
+                    tint = MaterialTheme.myColors.chart_x
                 )
             }
     })
@@ -121,11 +121,11 @@ fun ChartItem(mainVm: MainViewModel, month: Int) {
 @Composable
 private fun getColorBgForItemByAgeGroup(ageGroup: AgeGroups, month: Int): Color {
     return when (month) {
-        in ageGroup.noneAdult until ageGroup.adult -> Color.LightGray
-        in ageGroup.adult until ageGroup.middleAgeAdult -> Color.Green
-        in ageGroup.middleAgeAdult until ageGroup.lateAdult -> Color.Blue
-        in ageGroup.lateAdult until ageGroup.senior -> Color.Red
-        in ageGroup.senior until ageGroup.passive -> Color.Yellow
-        else -> Color.DarkGray
+        in ageGroup.noneAdult until ageGroup.adult -> MaterialTheme.myColors.chart_1
+        in ageGroup.adult until ageGroup.middleAgeAdult -> MaterialTheme.myColors.chart_2
+        in ageGroup.middleAgeAdult until ageGroup.lateAdult -> MaterialTheme.myColors.chart_3
+        in ageGroup.lateAdult until ageGroup.senior -> MaterialTheme.myColors.chart_4
+        in ageGroup.senior until ageGroup.passive -> MaterialTheme.myColors.chart_5
+        else -> MaterialTheme.myColors.chart_6
     }
 }

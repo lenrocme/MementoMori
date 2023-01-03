@@ -6,17 +6,23 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.example.mementomori.data.const.DataPickDropDown
 import com.example.mementomori.screen.modal.userDataInput.UserInputViewModel
+import java.util.*
 
 class UserDataViewModel() : ViewModel() {
     var userOldMonths: Int by mutableStateOf(720)
+    var userOldYears: Double by mutableStateOf(60.0)
     var userLifeExpectation: Int by mutableStateOf(900)
     var userLifeExpectationYears: Int by mutableStateOf(75)
     var yearsByCountryAndSex: Double by mutableStateOf(80.0)
     private var dataPicker = DataPickDropDown()
 
+    fun setData(userInputVm: UserInputViewModel){
+        calcLifeExpectation(userInputVm)
+        calcActualPositionMonth(userInputVm)
+    }
 
-    fun calcMonthsLifeExpect(userInputVm: UserInputViewModel) {
-        var smokingCoeff = if(userInputVm.isSmoker)
+    private fun calcLifeExpectation(userInputVm: UserInputViewModel) {
+        val smokingCoeff = if(userInputVm.isSmoker)
              -10 * 12
         else
             0
@@ -27,5 +33,19 @@ class UserDataViewModel() : ViewModel() {
 
         this.userLifeExpectationYears = (this.yearsByCountryAndSex * 12).toInt()
         this.userLifeExpectation = userLifeExpectationYears + smokingCoeff
+    }
+
+    private fun calcActualPositionMonth(userInputVm: UserInputViewModel) {
+        val calendar = Calendar.getInstance()
+        val actualYear = calendar.get(Calendar.YEAR)
+        val actualMonth = calendar.get(Calendar.MONTH) + 1
+        val diffYears = actualYear - userInputVm.bornYear.toInt()
+        val diffMonths = actualMonth - userInputVm.bornMonth.toInt()
+        this.userOldMonths = diffYears * 12 + diffMonths
+        this.setYearsOld(userOldMonths)
+    }
+
+    private fun setYearsOld(userOldMonths: Int) {
+        this.userOldYears = userOldMonths / 12.0
     }
 }
