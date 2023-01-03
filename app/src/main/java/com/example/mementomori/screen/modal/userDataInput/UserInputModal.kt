@@ -185,6 +185,7 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                 .background(color = Color.Green),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
+                            /** Sex picker */
                             Row(
                                 modifier = Modifier
                                     .width(percentWidth(.38f)),
@@ -192,7 +193,10 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                 content = {
                                     RadioButton(
                                         selected = mainVm.userInputVm.isMale,
-                                        onClick = { mainVm.userInputVm.isMale = true }
+                                        onClick = {
+                                            mainVm.userInputVm.isMale = true
+                                            mainVm.userDataVM.calcMonthsLifeExpect(mainVm.userInputVm)
+                                        }
                                     )
                                     Text(
                                         text = "Male",
@@ -201,8 +205,9 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                             .clickable(
                                                 interactionSource = MutableInteractionSource(),
                                                 indication = null){
-                                                mainVm.userInputVm.isMale = true
-                                            }
+                                                    mainVm.userInputVm.isMale = true
+                                                    mainVm.userDataVM.calcMonthsLifeExpect(mainVm.userInputVm)
+                                                }
                                     )
                                 }
                             )
@@ -213,7 +218,10 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                 content = {
                                     RadioButton(
                                         selected = !mainVm.userInputVm.isMale,
-                                        onClick = { mainVm.userInputVm.isMale = false }
+                                        onClick = {
+                                            mainVm.userInputVm.isMale = false
+                                            mainVm.userDataVM.calcMonthsLifeExpect(mainVm.userInputVm)
+                                        }
                                     )
                                     Text(
                                         text = "Female",
@@ -223,7 +231,8 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                                 interactionSource = MutableInteractionSource(),
                                                 indication = null){
                                                     mainVm.userInputVm.isMale = false
-                                            }
+                                                    mainVm.userDataVM.calcMonthsLifeExpect(mainVm.userInputVm)
+                                                }
                                     )
                                 }
                             )
@@ -234,6 +243,7 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                 .background(color = Color.Red),
                             //horizontalArrangement = Arrangement.SpaceBetween,
                         ) {
+                            /** Country picker */
                             Column(
                                 modifier = Modifier
                                     .width(percentWidth(.76f))
@@ -273,6 +283,7 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                                 onClick = {
                                                     mainVm.userInputVm.country = selectionOption
                                                     expandCountryDd = false
+                                                    mainVm.userDataVM.calcMonthsLifeExpect(mainVm.userInputVm)
                                                 }
                                             ) {
                                                 Text(text = selectionOption)
@@ -290,10 +301,12 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                             //horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
+                            /** Agreement about smoking checkbox */
                             Checkbox(
                                 checked = mainVm.userInputVm.isSmoker,
                                 onCheckedChange = {
                                     mainVm.userInputVm.isSmoker = it
+                                    mainVm.userDataVM.calcMonthsLifeExpect(mainVm.userInputVm)
                                 },
                                 colors = CheckboxDefaults.colors(
                                     checkedColor = MaterialTheme.myColors.checkedCheckbox,
@@ -301,7 +314,7 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                 )
                             )
                             Text(
-                                text = "I'm smoker",
+                                text = "Yes, I am a smoker",
                                 modifier = Modifier
                                     .background(color = Color.White)
                                     .clickable(
@@ -310,6 +323,7 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                     )
                                     {
                                         mainVm.userInputVm.isSmoker = !mainVm.userInputVm.isSmoker
+                                        mainVm.userDataVM.calcMonthsLifeExpect(mainVm.userInputVm)
                                     },
                                 style = MaterialTheme.typography.Checkbox,
                                 color = if (mainVm.userInputVm.isSmoker)
