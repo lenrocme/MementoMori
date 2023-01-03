@@ -7,6 +7,7 @@ data class DataPickDropDown(
 
     /**
      * Dictionary with life expectancy by country as key
+     * @sample => stats for: average of both / female / male
      * */
     val countryDict: Map<String, List<Double>> = mapOf(
         "Afghanistan"           to listOf(65.98, 67.59, 64.47),

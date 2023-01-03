@@ -20,9 +20,9 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        this.userDataVm = UserDataViewModel()
         this.userInputVm = UserInputViewModel()
-        this.mainVm = MainViewModel(userDataVm, userInputVm)
+        this.userDataVm = UserDataViewModel()
+        this.mainVm = MainViewModel(userInputVm, userDataVm)
 
         setContent {
             CustomMaterialTheme {
