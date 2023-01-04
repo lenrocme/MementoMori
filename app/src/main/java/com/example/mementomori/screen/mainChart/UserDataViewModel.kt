@@ -16,14 +16,14 @@ class UserDataViewModel() : ViewModel() {
     var yearsByCountryAndSex: Double by mutableStateOf(80.0)
     private var dataPicker = DataPickDropDown()
 
-    fun setData(userInputVm: UserInputViewModel){
+    fun calc(userInputVm: UserInputViewModel){
         calcLifeExpectation(userInputVm)
         calcActualPositionMonth(userInputVm)
     }
 
     private fun calcLifeExpectation(userInputVm: UserInputViewModel) {
         val smokingCoeff = if(userInputVm.isSmoker)
-             -10 * 12
+             -5 * 12
         else
             0
         if(userInputVm.isMale)
