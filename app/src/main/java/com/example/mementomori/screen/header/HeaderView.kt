@@ -33,6 +33,7 @@ import com.example.mementomori.R
 import com.example.mementomori.helper.percentHeight
 import com.example.mementomori.helper.percentWidth
 import com.example.mementomori.ui.theme.AgeGroup
+import com.example.mementomori.ui.theme.AgeGroupMonths
 import com.example.mementomori.ui.theme.HeaderContainer
 import com.example.mementomori.ui.theme.myColors
 
@@ -165,102 +166,160 @@ private fun HeaderInfoChart(mainVm: MainViewModel) {
         Text(
             text = "info"
         )
-        AgeGroup()
+        LegendOfAgeGroup()
         Spacer(modifier = Modifier.height(20.dp))
     }
 }
 
 @Composable
-private fun AgeGroup() {
-    Column(
-        modifier = Modifier
-            .width(percentWidth(.7f))
-            .height(percentHeight(.6f))
-            .border(BorderStroke(2.dp, Color.DarkGray))
-    ) {
-        Box(
+private fun LegendOfChart() {
+
+}
+
+@Composable
+private fun LegendOfAgeGroup() {
+    Column()
+    {
+        Text(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(percentHeight(.1f))
-                .background(color = MaterialTheme.myColors.chart_1),
-            contentAlignment = Alignment.Center,
-        ){
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                text = "0..20",
-                style = MaterialTheme.typography.AgeGroup,
-            )
-        }
-        Box(
+                .width(percentWidth(.7f)),
+            text = "Age group",
+            fontSize = 16.sp,
+            textAlign = TextAlign.Left,
+            color = MaterialTheme.myColors.headerItems,
+        )
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(percentHeight(.1f))
-                .background(color = MaterialTheme.myColors.chart_2),
-            contentAlignment = Alignment.Center,
-        ){
-            Text(
+                .width(percentWidth(.7f))
+                .height(percentHeight(.6f))
+                .border(BorderStroke(2.dp, Color.DarkGray))
+        ) {
+            Box(
                 modifier = Modifier
-                    .fillMaxWidth(),
-                text = "20..30",
-                style = MaterialTheme.typography.AgeGroup,
-            )
-        }
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(percentHeight(.1f))
-                .background(color = MaterialTheme.myColors.chart_3),
-            contentAlignment = Alignment.Center,
-        ){
-            Text(
+                    .fillMaxWidth()
+                    .height(percentHeight(.1f))
+                    .background(color = MaterialTheme.myColors.chart_1),
+                contentAlignment = Alignment.Center,
+            ) {
+                Column() {
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "0..20",
+                        style = MaterialTheme.typography.AgeGroup,
+                    )
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "0..240",
+                        style = MaterialTheme.typography.AgeGroupMonths,
+                    )
+                }
+            }
+            Box(
                 modifier = Modifier
-                    .fillMaxWidth(),
-                text = "30..45",
-                style = MaterialTheme.typography.AgeGroup,
-            )
-        }
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(percentHeight(.1f))
-                .background(color = MaterialTheme.myColors.chart_4),
-            contentAlignment = Alignment.Center,
-        ){
-            Text(
+                    .fillMaxWidth()
+                    .height(percentHeight(.1f))
+                    .background(color = MaterialTheme.myColors.chart_2),
+                contentAlignment = Alignment.Center,
+            ) {
+                Column() {
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "20..30",
+                        style = MaterialTheme.typography.AgeGroup,
+                    )
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "240..360",
+                        style = MaterialTheme.typography.AgeGroupMonths,
+                    )
+                }
+            }
+            Box(
                 modifier = Modifier
-                    .fillMaxWidth(),
-                text = "45..60",
-                style = MaterialTheme.typography.AgeGroup,
-            )
-        }
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(percentHeight(.1f))
-                .background(color = MaterialTheme.myColors.chart_5),
-            contentAlignment = Alignment.Center,
-        ){
-            Text(
+                    .fillMaxWidth()
+                    .height(percentHeight(.1f))
+                    .background(color = MaterialTheme.myColors.chart_3),
+                contentAlignment = Alignment.Center,
+            ) {
+                Column() {
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "30..45",
+                        style = MaterialTheme.typography.AgeGroup,
+                    )
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "360..540",
+                        style = MaterialTheme.typography.AgeGroupMonths,
+                    )
+                }
+            }
+            Box(
                 modifier = Modifier
-                    .fillMaxWidth(),
-                text = "60+",
-                style = MaterialTheme.typography.AgeGroup,
-            )
-        }
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(percentHeight(.1f))
-                .background(color = MaterialTheme.myColors.chart_6),
-            contentAlignment = Alignment.Center,
-        ){
-            Text(
+                    .fillMaxWidth()
+                    .height(percentHeight(.1f))
+                    .background(color = MaterialTheme.myColors.chart_4),
+                contentAlignment = Alignment.Center,
+            ) {
+                Column() {
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "540..20",
+                        style = MaterialTheme.typography.AgeGroup,
+                    )
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "540..720",
+                        style = MaterialTheme.typography.AgeGroupMonths,
+                    )
+                }
+            }
+            Box(
                 modifier = Modifier
-                    .fillMaxWidth(),
-                text = "Above avg",
-                style = MaterialTheme.typography.AgeGroup,
-            )
+                    .fillMaxWidth()
+                    .height(percentHeight(.1f))
+                    .background(color = MaterialTheme.myColors.chart_5),
+                contentAlignment = Alignment.Center,
+            ) {
+                Column() {
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "60+ years",
+                        style = MaterialTheme.typography.AgeGroup,
+                    )
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "720+ months",
+                        style = MaterialTheme.typography.AgeGroupMonths,
+                    )
+                }
+            }
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(percentHeight(.1f))
+                    .background(color = MaterialTheme.myColors.chart_6),
+                contentAlignment = Alignment.Center,
+            ) {
+                Column() {
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "Above avg of \nlife expectancy",
+                        style = MaterialTheme.typography.AgeGroupMonths,
+                    )
+                }
+            }
         }
     }
 }

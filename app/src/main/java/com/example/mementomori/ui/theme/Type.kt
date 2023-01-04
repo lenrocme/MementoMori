@@ -95,3 +95,15 @@ val Typography.AgeGroup: TextStyle
             color = MaterialTheme.myColors.bgHeader,
         )
     }
+
+val Typography.AgeGroupMonths: TextStyle
+    @Composable
+    get() {
+        return  TextStyle(
+            fontFamily = FontFamily.Default,
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.myColors.bgHeader,
+        )
+    }
