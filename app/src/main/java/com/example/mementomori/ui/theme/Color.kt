@@ -41,6 +41,8 @@ val chart_4 = Color.Yellow
 val chart_5 = Color(0xFFCACACA)
 val chart_6 = Color(0xFF00C7B0)
 val chart_x = Color(0xFFC73F00)
+val chart_bg_above = Color(0xFF00FFE2)
+val chart_above = Color(0xFF007501)
 //val chart_x = Color(0xFF525252)
 
 /**

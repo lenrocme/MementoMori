@@ -27,6 +27,8 @@ data class CustomColors(
     val chart_5: Color,
     val chart_6: Color,
     val chart_x: Color,
+    val chart_bg_above: Color,
+    val chart_above: Color,
 
     val focusLine: Color,
     val iconButton: Color,

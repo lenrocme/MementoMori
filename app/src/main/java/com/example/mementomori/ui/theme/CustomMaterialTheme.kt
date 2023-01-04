@@ -34,6 +34,8 @@ private val DarkColorScheme = CustomColors(
     chart_5 = chart_5,
     chart_6 = chart_6,
     chart_x = chart_x,
+    chart_bg_above = chart_bg_above,
+    chart_above = chart_above,
 
     focusLine = none,
     iconButton = none,
@@ -85,6 +87,8 @@ private val LightColorScheme = CustomColors(
     chart_5 = chart_5,
     chart_6 = chart_6,
     chart_x = chart_x,
+    chart_bg_above = chart_bg_above,
+    chart_above = chart_above,
 
     focusLine = none,
     iconButton = none,
