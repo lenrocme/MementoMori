@@ -3,14 +3,14 @@ package com.example.mementomori.screen.header
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.TextField
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,17 +18,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mementomori.MainViewModel
 import com.example.mementomori.R
-import com.example.mementomori.ui.theme.HeaderContainer
-import com.example.mementomori.ui.theme.myColors
+import com.example.mementomori.helper.percentHeight
+import com.example.mementomori.helper.percentWidth
+import com.example.mementomori.ui.theme.*
 
 @Composable
 fun HeaderView(mainVm: MainViewModel) {
@@ -148,15 +151,308 @@ private fun HeaderStatsChart(mainVm: MainViewModel) {
             text = "Your life expectancy is ${mainVm.userDataVM.userLifeExpectation} months(Leafs)",
             style = MaterialTheme.typography.HeaderContainer,
         )
-        Spacer(modifier = Modifier.height(5.dp))
+        Spacer(modifier = Modifier.height(10.dp))
     }
 }
 
 @Composable
 private fun HeaderInfoChart(mainVm: MainViewModel) {
-    Column() {
+    Column(
+        modifier = Modifier
+            .verticalScroll(rememberScrollState()),
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        LegendOfChart()
+        Spacer(modifier = Modifier.height(30.dp))
+        LegendOfAgeGroup()
+        Spacer(modifier = Modifier.height(20.dp))
+    }
+}
+
+@Composable
+private fun LegendOfChart() {
+    Column(
+        modifier = Modifier
+            .width(percentWidth(.75f)),
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(percentWidth(1f) / 14),
+                content = {
+                    Icon(
+                        modifier = Modifier,
+                        contentDescription = "leaf",
+                        painter = painterResource(id = R.drawable.leaf_svgrepo_com),
+                        tint = Color.Blue,
+                    )
+                }
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Text(
+                modifier = Modifier,
+                text = "Each leaf represents one month",
+                style = MaterialTheme.typography.HeaderContainerInfo,
+            )
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(percentWidth(1f) / 14),
+                content = {
+                    Icon(
+                        modifier = Modifier,
+                        contentDescription = "leaf",
+                        painter = painterResource(id = R.drawable.leaf_svgrepo_com),
+                        tint = Color.Red,
+                    )
+                }
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Text(
+                modifier = Modifier,
+                text = "Each red leaf represents 12th month of a year",
+                style = MaterialTheme.typography.HeaderContainerInfo,
+            )
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(percentWidth(1f) / 14),
+                content = {
+                    Icon(
+                        modifier = Modifier,
+                        contentDescription = "leaf",
+                        painter = painterResource(id = R.drawable.leaf_svgrepo_com),
+                        tint = MaterialTheme.myColors.chart_above,
+                    )
+                }
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Text(
+                modifier = Modifier,
+                text = "Represents a month lived beyond life expectancy",
+                style = MaterialTheme.typography.HeaderContainerInfo,
+            )
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(percentWidth(1f) / 14),
+                content = {
+                    Icon(
+                        modifier = Modifier,
+                        contentDescription = "leaf",
+                        painter = painterResource(id = R.drawable.leaf_svgrepo_com),
+                        tint = Color.Blue,
+                    )
+
+                    Icon(
+                        Icons.Default.Clear,
+                        modifier = Modifier
+                            .size(percentWidth(1f) / 14),
+                        contentDescription = "spent leaf",
+                        tint = MaterialTheme.myColors.chart_x
+                    )
+                }
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Text(
+                modifier = Modifier,
+                text = "Represents a month spent",
+                style = MaterialTheme.typography.HeaderContainerInfo,
+            )
+        }
+        Spacer(modifier = Modifier.height(4.dp))
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(percentWidth(1f) / 14)
+                    //.border(BorderStroke(1.dp, MaterialTheme.myColors.chart_x)),
+                    .background(color = Color.White),
+                contentAlignment = Alignment.Center,
+                content = {
+                    Icon(
+                        modifier = Modifier,
+                        contentDescription = "leaf",
+                        painter = painterResource(id = R.drawable.leaf_svgrepo_com),
+                        tint = Color.Blue,
+                    )
+                }
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Text(
+                modifier = Modifier,
+                text = "Represent actual month(leaf)",
+                style = MaterialTheme.typography.HeaderContainerInfo,
+            )
+        }
+    }
+}
+
+@Composable
+private fun LegendOfAgeGroup() {
+    Column()
+    {
         Text(
-            text = "info"
+            modifier = Modifier
+                .width(percentWidth(.75f)),
+            text = "Age group",
+            fontSize = 16.sp,
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.myColors.headerItems,
         )
+        Column(
+            modifier = Modifier
+                .width(percentWidth(.75f))
+                .border(BorderStroke(2.dp, Color.DarkGray))
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(color = MaterialTheme.myColors.chart_1)
+                    .padding(vertical = 7.dp),
+                contentAlignment = Alignment.Center,
+            ) {
+                Column() {
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "0..20",
+                        style = MaterialTheme.typography.AgeGroup,
+                    )
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "0..240",
+                        style = MaterialTheme.typography.AgeGroupMonths,
+                    )
+                }
+            }
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(color = MaterialTheme.myColors.chart_2)
+                    .padding(vertical = 7.dp),
+                contentAlignment = Alignment.Center,
+            ) {
+                Column() {
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "20..30",
+                        style = MaterialTheme.typography.AgeGroup,
+                    )
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "240..360",
+                        style = MaterialTheme.typography.AgeGroupMonths,
+                    )
+                }
+            }
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(color = MaterialTheme.myColors.chart_3)
+                    .padding(vertical = 7.dp),
+                contentAlignment = Alignment.Center,
+            ) {
+                Column() {
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "30..45",
+                        style = MaterialTheme.typography.AgeGroup,
+                    )
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "360..540",
+                        style = MaterialTheme.typography.AgeGroupMonths,
+                    )
+                }
+            }
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(color = MaterialTheme.myColors.chart_4)
+                    .padding(vertical = 7.dp),
+                contentAlignment = Alignment.Center,
+            ) {
+                Column() {
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "540..20",
+                        style = MaterialTheme.typography.AgeGroup,
+                    )
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "540..720",
+                        style = MaterialTheme.typography.AgeGroupMonths,
+                    )
+                }
+            }
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(color = MaterialTheme.myColors.chart_5)
+                    .padding(vertical = 7.dp),
+                contentAlignment = Alignment.Center,
+            ) {
+                Column() {
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "60+ years",
+                        style = MaterialTheme.typography.AgeGroup,
+                    )
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "720+ months",
+                        style = MaterialTheme.typography.AgeGroupMonths,
+                    )
+                }
+            }
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(color = MaterialTheme.myColors.chart_6)
+                    .padding(vertical = 7.dp),
+                contentAlignment = Alignment.Center,
+            ) {
+                Column() {
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "Above avg of \nlife expectancy",
+                        style = MaterialTheme.typography.AgeGroupMonths,
+                    )
+                }
+            }
+        }
     }
 }

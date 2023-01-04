@@ -1,12 +1,9 @@
 package com.example.mementomori.screen.mainChart
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
@@ -117,12 +114,17 @@ fun ChartItem(mainVm: MainViewModel, itemMonth: Int, countItems: Int) {
     Box(
         modifier = Modifier
             .size(percentWidth(1f) / itemPerRow)
-            .background(color =  if (
-                itemMonth <= mainVm.userDataVM.userLifeExpectation)
-                    getColorBgForItemByAgeGroup(mainVm.ageGroup, itemMonth)
-                else
-                    MaterialTheme.myColors.chart_bg_above
-            ),
+            .background(color =
+                if(itemMonth == mainVm.userDataVM.userOldMonths) {
+                    Color.White
+                } else {
+                    if (
+                        itemMonth <= mainVm.userDataVM.userLifeExpectation)
+                        getColorBgForItemByAgeGroup(mainVm.ageGroup, itemMonth)
+                    else
+                        MaterialTheme.myColors.chart_bg_above
+                }
+                ),
         content = {
             if(countItems >= itemMonth) {
                 Icon(

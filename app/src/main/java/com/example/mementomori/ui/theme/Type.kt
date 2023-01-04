@@ -83,3 +83,39 @@ val Typography.HeaderContainer: TextStyle
             color = MaterialTheme.myColors.headerItems,
         )
     }
+
+val Typography.HeaderContainerInfo: TextStyle
+    @Composable
+    get() {
+        return  TextStyle(
+            fontFamily = FontFamily.Default,
+            fontWeight = FontWeight.Medium,
+            fontSize = 15.sp,
+            textAlign = TextAlign.Left,
+            color = MaterialTheme.myColors.headerItems,
+        )
+    }
+
+val Typography.AgeGroup: TextStyle
+    @Composable
+    get() {
+        return  TextStyle(
+            fontFamily = FontFamily.Default,
+            fontWeight = FontWeight.Bold,
+            fontSize = 30.sp,
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.myColors.bgHeader,
+        )
+    }
+
+val Typography.AgeGroupMonths: TextStyle
+    @Composable
+    get() {
+        return  TextStyle(
+            fontFamily = FontFamily.Default,
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.myColors.bgHeader,
+        )
+    }
