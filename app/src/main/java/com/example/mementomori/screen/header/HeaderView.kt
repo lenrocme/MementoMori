@@ -10,7 +10,9 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.TextField
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,85 +22,141 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.mementomori.MainViewModel
 import com.example.mementomori.R
+import com.example.mementomori.ui.theme.HeaderContainer
 import com.example.mementomori.ui.theme.myColors
 
 @Composable
 fun HeaderView(mainVm: MainViewModel) {
     val focusManager = LocalFocusManager.current
-   /* Box(
+    Surface(
         modifier = Modifier
-            .wrapContentSize(),
-            //.background(color = MaterialTheme.colors.onSurface)
-    ) {*/
-        Surface(
-            //shape = RectangleShape,
+            .shadow(elevation = 10.dp, shape = RectangleShape)
+            .animateContentSize(
+                animationSpec = spring(
+                    dampingRatio = Spring.DampingRatioLowBouncy,
+                    stiffness = Spring.StiffnessLow,
+                )
+            )
+            .fillMaxWidth()
+            .pointerInput(Unit) {
+                detectTapGestures(onTap = {
+                    focusManager.clearFocus()
+                })
+            }
+            .clickable(interactionSource = MutableInteractionSource(), indication = null) {
+                //mUiTaxViewModel.isTaxReportExtended = !mUiTaxViewModel.isTaxReportExtended
+                mainVm.userInputVm.isHeaderChartVis = false
+                mainVm.userInputVm.isHeaderInfoVis = false
+            }
+            .background(color = MaterialTheme.myColors.bgHeader),
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .wrapContentSize()
-                .shadow(elevation = 10.dp, shape = RectangleShape)
-                .animateContentSize(
-                    animationSpec = spring(
-                        dampingRatio = Spring.DampingRatioLowBouncy,
-                        stiffness = Spring.StiffnessLow
-                    )
-                )
                 .fillMaxWidth()
-                .pointerInput(Unit) {
-                    detectTapGestures(onTap = {
-                        focusManager.clearFocus()
-                    })
-                }
-                .clickable(interactionSource = MutableInteractionSource(), indication = null) {
-                    //mUiTaxViewModel.isTaxReportExtended = !mUiTaxViewModel.isTaxReportExtended
-                }
                 .background(color = MaterialTheme.myColors.bgHeader),
-            //.padding(bottom = getPaddingCards()),
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
+            Spacer( // spacer for translucent action bar
                 modifier = Modifier
+                    .height(0.dp)
                     .fillMaxWidth()
-                    .background(color = MaterialTheme.myColors.bgHeader),
+            )
+            Row(
+                modifier = Modifier,
+                    //.padding(bottom = 5.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Spacer( // spacer for translucent action bar
+                Icon(
                     modifier = Modifier
-                        .height(0.dp)
-                        .fillMaxWidth()
+                        .clickable(
+                            interactionSource = MutableInteractionSource(),
+                            indication = null
+                        ) {
+                            mainVm.userInputVm.isHeaderInfoVis = false
+                            mainVm.userInputVm.isHeaderChartVis = true
+                        }
+                        .padding(5.dp)
+                        .size(35.dp)
+                        .rotate(90f),
+                    painter = painterResource(id = R.drawable.ic_baseline_bar_chart_24),
+                    contentDescription = "stats",
+                    tint = MaterialTheme.myColors.headerItems
                 )
-                Row(
-                    modifier = Modifier,
-                        //.padding(bottom = 5.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        modifier = Modifier
-                            .padding(5.dp)
-                            .size(35.dp)
-                            .rotate(90f),
-                        painter = painterResource(id = R.drawable.ic_baseline_bar_chart_24),
-                        contentDescription = "stats",
-                        tint = MaterialTheme.myColors.main_300
-                    )
-                    Spacer(
-                        modifier = Modifier
-                            .weight(1f )
-                    )
-                    Icon(
-                        modifier = Modifier
-                            .padding(5.dp)
-                            .size(35.dp),
-                        painter = painterResource(id = R.drawable.ic_outline_info_24),
-                        contentDescription = "info",
-                        tint = MaterialTheme.myColors.main_300
-                    )
-                }
-                Column() {
-
-                }
+                Text(
+                    modifier = Modifier
+                        .weight(1f ),
+                    text = "${mainVm.userDataVM.userOldMonths} / ${mainVm.userDataVM.userLifeExpectation}",
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.h2,
+                    color = MaterialTheme.myColors.headerItems,
+                )
+                Icon(
+                    modifier = Modifier
+                        .clickable(
+                            interactionSource = MutableInteractionSource(),
+                            indication = null
+                        ) {
+                            mainVm.userInputVm.isHeaderChartVis = false
+                            mainVm.userInputVm.isHeaderInfoVis = true
+                        }
+                        .padding(5.dp)
+                        .size(35.dp),
+                    painter = painterResource(id = R.drawable.ic_outline_info_24),
+                    contentDescription = "info",
+                    tint = MaterialTheme.myColors.headerItems
+                )
+            }
+            if (mainVm.userInputVm.isHeaderChartVis) {
+                HeaderStatsChart(mainVm)
+            }
+            if (mainVm.userInputVm.isHeaderInfoVis) {
+                HeaderInfoChart(mainVm)
             }
         }
+    }
 
+}
+
+@Composable
+private fun HeaderStatsChart(mainVm: MainViewModel) {
+    Column {
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            modifier = Modifier
+                .fillMaxWidth(),
+            text = "Spent: ${mainVm.userDataVM.userOldMonths} months(Leafs)",
+            style = MaterialTheme.typography.HeaderContainer,
+        )
+        Text(
+            modifier = Modifier
+                .fillMaxWidth(),
+            text = if (mainVm.userDataVM.aboveAverageLifeExpect <= 0)
+                    "Remain: ${mainVm.userDataVM.remainMonths} months(Leafs)"
+                else
+                    "Above avg: ${mainVm.userDataVM.aboveAverageLifeExpect}\nYou live already ${mainVm.userDataVM.aboveAverageLifeExpect} months(Leafs) above average",
+            style = MaterialTheme.typography.HeaderContainer,
+        )
+        Text(
+            modifier = Modifier
+                .fillMaxWidth(),
+            text = "Your life expectancy is ${mainVm.userDataVM.userLifeExpectation} months(Leafs)",
+            style = MaterialTheme.typography.HeaderContainer,
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+    }
+}
+
+@Composable
+private fun HeaderInfoChart(mainVm: MainViewModel) {
+    Column() {
+        Text(
+            text = "info"
+        )
+    }
 }

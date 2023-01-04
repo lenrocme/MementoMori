@@ -1,6 +1,8 @@
 package com.example.mementomori.screen.mainChart
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CornerSize
@@ -32,6 +34,13 @@ private val chartPaddingTop = 45.dp
 fun MainChart(mainVm: MainViewModel) {
     mainVm.userDataVM.calc(mainVm.userInputVm)
     Box(modifier = Modifier
+        .clickable(
+            interactionSource = MutableInteractionSource(),
+            indication = null
+        ){
+            mainVm.userInputVm.isHeaderChartVis = false
+            mainVm.userInputVm.isHeaderInfoVis = false
+        }
         .fillMaxSize(),
         content = {
             Chart(mainVm)
