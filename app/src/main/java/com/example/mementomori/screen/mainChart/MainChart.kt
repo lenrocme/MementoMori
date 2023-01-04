@@ -127,7 +127,8 @@ fun ChartItem(mainVm: MainViewModel, itemMonth: Int, countItems: Int) {
                 if (mainVm.userDataVM.userOldMonths > itemMonth) {
                     Icon(
                         Icons.Default.Clear,
-                        modifier = Modifier,
+                        modifier = Modifier
+                            .size(percentWidth(1f) / itemPerRow),
                         contentDescription = "Clear",
                         tint = MaterialTheme.myColors.chart_x
                     )
