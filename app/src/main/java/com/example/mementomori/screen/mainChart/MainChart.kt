@@ -21,10 +21,12 @@ import com.example.mementomori.MainViewModel
 import com.example.mementomori.helper.percentWidth
 import com.example.mementomori.R
 import com.example.mementomori.data.const.AgeGroups
+import com.example.mementomori.screen.header.HeaderView
 import com.example.mementomori.screen.modal.userDataInput.ModalUserDataInput
 import com.example.mementomori.ui.theme.myColors
 
 private const val itemPerRow = 15
+private val chartPaddingTop = 45.dp
 
 @Composable
 fun MainChart(mainVm: MainViewModel) {
@@ -33,6 +35,7 @@ fun MainChart(mainVm: MainViewModel) {
         .fillMaxSize(),
         content = {
             Chart(mainVm)
+            HeaderView(mainVm)
 
             FloatingActionButton(
                 modifier = Modifier
@@ -62,10 +65,12 @@ fun Chart(mainVm: MainViewModel) {
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .padding(top = chartPaddingTop)
             .verticalScroll(state),
         content = {
             if (mainVm.userDataVM.userLifeExpectation >= mainVm.userDataVM.userOldMonths) {
                 for (row in 0..mainVm.userDataVM.userLifeExpectation / itemPerRow) {
+                    Spacer(Modifier.height(3.dp))
                     Row(
                         modifier = Modifier
                             .fillMaxWidth(),
@@ -77,11 +82,11 @@ fun Chart(mainVm: MainViewModel) {
                                 ChartItem(mainVm, countMonth, mainVm.userDataVM.userLifeExpectation)
                         }
                     }
-                    Spacer(Modifier.height(3.dp))
                 }
             }
             else {
                 for (row in 0 .. mainVm.userDataVM.userOldMonths / itemPerRow){
+                    Spacer(Modifier.height(3.dp))
                     Row(
                         modifier = Modifier
                             .fillMaxWidth(),
@@ -93,7 +98,6 @@ fun Chart(mainVm: MainViewModel) {
                                 ChartItem(mainVm, countMonth, mainVm.userDataVM.userOldMonths)
                         }
                     }
-                    Spacer(Modifier.height(3.dp))
                 }
             }
         })
