@@ -53,6 +53,7 @@ private val DarkColorScheme = CustomColors(
     bg_card = main_300,
     bg_modal = modalTransBground,
     bgHeader = bgHeader,
+    headerItems = headerItems,
     /**
      * Font colors
      * */
@@ -107,6 +108,7 @@ private val LightColorScheme = CustomColors(
     bg_card = main_300,
     bg_modal = modalTransBground,
     bgHeader = bgHeader,
+    headerItems = headerItems,
     /**
      * Font colors
      * */

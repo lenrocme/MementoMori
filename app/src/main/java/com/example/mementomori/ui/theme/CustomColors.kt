@@ -46,6 +46,7 @@ data class CustomColors(
     val bg_card: Color,
     val bg_modal: Color,
     val bgHeader: Color,
+    val headerItems: Color,
 
     /**
      * Font colors
