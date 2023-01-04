@@ -12,7 +12,8 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.TextField
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,6 +26,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,10 +34,7 @@ import com.example.mementomori.MainViewModel
 import com.example.mementomori.R
 import com.example.mementomori.helper.percentHeight
 import com.example.mementomori.helper.percentWidth
-import com.example.mementomori.ui.theme.AgeGroup
-import com.example.mementomori.ui.theme.AgeGroupMonths
-import com.example.mementomori.ui.theme.HeaderContainer
-import com.example.mementomori.ui.theme.myColors
+import com.example.mementomori.ui.theme.*
 
 @Composable
 fun HeaderView(mainVm: MainViewModel) {
@@ -163,9 +162,7 @@ private fun HeaderStatsChart(mainVm: MainViewModel) {
 private fun HeaderInfoChart(mainVm: MainViewModel) {
     Column() {
         Spacer(modifier = Modifier.height(10.dp))
-        Text(
-            text = "info"
-        )
+        LegendOfChart()
         LegendOfAgeGroup()
         Spacer(modifier = Modifier.height(20.dp))
     }
@@ -173,7 +170,141 @@ private fun HeaderInfoChart(mainVm: MainViewModel) {
 
 @Composable
 private fun LegendOfChart() {
+    Column(
+        modifier = Modifier
+            .width(percentWidth(.75f)),
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(percentWidth(1f) / 14),
+                content = {
+                    Icon(
+                        modifier = Modifier,
+                        contentDescription = "leaf",
+                        painter = painterResource(id = R.drawable.leaf_svgrepo_com),
+                        tint = Color.Blue,
+                    )
+                }
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Text(
+                modifier = Modifier,
+                text = "Each leaf represents one month",
+                style = MaterialTheme.typography.HeaderContainerInfo,
+            )
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(percentWidth(1f) / 14),
+                content = {
+                    Icon(
+                        modifier = Modifier,
+                        contentDescription = "leaf",
+                        painter = painterResource(id = R.drawable.leaf_svgrepo_com),
+                        tint = Color.Red,
+                    )
+                }
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Text(
+                modifier = Modifier,
+                text = "Each red leaf represents 12th month of a year",
+                style = MaterialTheme.typography.HeaderContainerInfo,
+            )
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(percentWidth(1f) / 14),
+                content = {
+                    Icon(
+                        modifier = Modifier,
+                        contentDescription = "leaf",
+                        painter = painterResource(id = R.drawable.leaf_svgrepo_com),
+                        tint = MaterialTheme.myColors.chart_above,
+                    )
+                }
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Text(
+                modifier = Modifier,
+                text = "Represents a month lived beyond life expectancy",
+                style = MaterialTheme.typography.HeaderContainerInfo,
+            )
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(percentWidth(1f) / 14),
+                content = {
+                    Icon(
+                        modifier = Modifier,
+                        contentDescription = "leaf",
+                        painter = painterResource(id = R.drawable.leaf_svgrepo_com),
+                        tint = Color.Blue,
+                    )
 
+                    Icon(
+                        Icons.Default.Clear,
+                        modifier = Modifier
+                            .size(percentWidth(1f) / 14),
+                        contentDescription = "spent leaf",
+                        tint = MaterialTheme.myColors.chart_x
+                    )
+                }
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Text(
+                modifier = Modifier,
+                text = "Represents a month spent",
+                style = MaterialTheme.typography.HeaderContainerInfo,
+            )
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(percentWidth(1f) / 14)
+                    //.border(BorderStroke(1.dp, MaterialTheme.myColors.chart_x)),
+                    .background(color = Color.White),
+                content = {
+                    Icon(
+                        modifier = Modifier,
+                        contentDescription = "leaf",
+                        painter = painterResource(id = R.drawable.leaf_svgrepo_com),
+                        tint = Color.Blue,
+                    )
+                }
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Text(
+                modifier = Modifier,
+                text = "Represent actual month(leaf)",
+                style = MaterialTheme.typography.HeaderContainerInfo,
+            )
+        }
+    }
 }
 
 @Composable
@@ -182,15 +313,15 @@ private fun LegendOfAgeGroup() {
     {
         Text(
             modifier = Modifier
-                .width(percentWidth(.7f)),
+                .width(percentWidth(.75f)),
             text = "Age group",
             fontSize = 16.sp,
-            textAlign = TextAlign.Left,
+            textAlign = TextAlign.Center,
             color = MaterialTheme.myColors.headerItems,
         )
         Column(
             modifier = Modifier
-                .width(percentWidth(.7f))
+                .width(percentWidth(.75f))
                 .height(percentHeight(.6f))
                 .border(BorderStroke(2.dp, Color.DarkGray))
         ) {

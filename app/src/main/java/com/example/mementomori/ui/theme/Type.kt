@@ -84,6 +84,18 @@ val Typography.HeaderContainer: TextStyle
         )
     }
 
+val Typography.HeaderContainerInfo: TextStyle
+    @Composable
+    get() {
+        return  TextStyle(
+            fontFamily = FontFamily.Default,
+            fontWeight = FontWeight.Medium,
+            fontSize = 15.sp,
+            textAlign = TextAlign.Left,
+            color = MaterialTheme.myColors.headerItems,
+        )
+    }
+
 val Typography.AgeGroup: TextStyle
     @Composable
     get() {
