@@ -3,6 +3,7 @@ package com.example.mementomori.screen.modifier
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import com.example.mementomori.ui.theme.myColors
 
 object CustomModifier{
@@ -28,15 +29,16 @@ object CustomModifier{
 
     @Composable
     fun colorsOfDropDown() = TextFieldDefaults.outlinedTextFieldColors(
-        textColor = MaterialTheme.myColors.none,
+        textColor = MaterialTheme.myColors.bgHeader,
         //disabledTextColor = disabledTextColor,
-        backgroundColor = MaterialTheme.myColors.main_300,
+        backgroundColor = Color.Transparent,
         cursorColor = MaterialTheme.myColors.focusLine,
+        focusedBorderColor = MaterialTheme.myColors.bgHeader,
         //focusedIndicatorColor = MaterialTheme.myColors.focusLine,
         focusedLabelColor = MaterialTheme.myColors.none,
         unfocusedLabelColor = MaterialTheme.myColors.none,
        // unfocusedIndicatorColor = MaterialTheme.myColors.none,
-        trailingIconColor = MaterialTheme.myColors.main_000,
+        trailingIconColor = MaterialTheme.myColors.bgHeader,
         //errorCursorColor = errorCursorColor,
     )
 }

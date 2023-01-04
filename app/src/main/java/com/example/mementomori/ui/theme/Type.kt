@@ -58,7 +58,7 @@ val Typography.UserInput: TextStyle
             fontFamily = FontFamily.Default,
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
-            color = MaterialTheme.myColors.main_000,
+            color = MaterialTheme.myColors.bgHeader,
         )
     }
 

@@ -42,8 +42,6 @@ fun MainChart(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
         .fillMaxSize(),
         content = {
             Chart(mainVm)
-            HeaderView(mainVm)
-
             FloatingActionButton(
                 modifier = Modifier
                     .padding(all = 16.dp)
@@ -59,6 +57,7 @@ fun MainChart(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
             }
             if (mainVm.userInputVm.isModalVisible)
                 ModalUserDataInput(mainVm, mUserForm)
+            HeaderView(mainVm)
         }
     )
 }

@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material3.Surface
@@ -14,7 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.mementomori.MainViewModel
 import com.example.mementomori.R
 import com.example.mementomori.data.lastInput.LastInputViewModel
@@ -47,6 +50,7 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .padding(top = 45.dp)
             .background(MaterialTheme.myColors.bg_modal.copy(alpha = .7f))
             .clickable(
                 interactionSource = MutableInteractionSource(),
@@ -59,30 +63,91 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
             Surface(
                 shadowElevation = 5.dp,
                 tonalElevation = 5.dp,
+
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = percentWidth(.06f), vertical = percentHeight(.06f))
-                    .background(color = MaterialTheme.myColors.bg_card)
+                    .wrapContentHeight()
+                    .padding(horizontal = percentWidth(.07f), vertical = percentHeight(.07f))
+                    //.background(color = MaterialTheme.myColors.bg_card)
                     .clickable(
                         interactionSource = MutableInteractionSource(),
                         indication = null
                     ) {
                         focusManager.clearFocus()
                     },
+                shape = RoundedCornerShape(5),
             ) {
-                Column() {
+                //Column() {
                     Column(
                         modifier = Modifier
-                            .height(percentHeight(1.0f - .12f * 2))
+                            //.height(percentHeight(1.0f - .12f * 2))
                             .verticalScroll(rememberScrollState())
-                            .padding(horizontal = percentWidth(.06f))
-                            .background(color = Color.Blue),
+                            .padding(top = percentWidth(.11f), bottom = percentWidth(.06f))
+                            .padding(horizontal = percentWidth(.06f)),
                         verticalArrangement = Arrangement.Center,
                     ) {
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .background(color = Color.Red),
+                        ) {
+                            /** Country picker */
+                            Column(
+                                modifier = Modifier
+                                    .width(percentWidth(.76f))
+                            ) {
+                                ExposedDropdownMenuBox(
+                                    modifier = Modifier,
+                                        //.background(color = MaterialTheme.myColors.main_300),
+                                    expanded = expandCountryDd,
+                                    onExpandedChange = { expandCountryDd = !expandCountryDd }
+                                ) {
+                                    OutlinedTextField(
+                                        value = _country,
+                                        onValueChange = {
+
+                                        },
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .wrapContentHeight(),
+                                        readOnly = true,
+                                        textStyle = Typography.UserInput,
+                                        trailingIcon = {
+                                            ExposedDropdownMenuDefaults.TrailingIcon(
+                                                expanded = expandCountryDd
+                                            )
+                                        },
+                                        colors = CustomModifier.colorsOfDropDown(),
+                                    )
+                                    ExposedDropdownMenu(
+                                        expanded = expandCountryDd,
+                                        onDismissRequest = {
+                                            expandCountryDd = false
+                                        },
+                                    ) {
+                                        dropDownCountries.forEach { selectionOption ->
+                                            DropdownMenuItem(
+                                                onClick = {
+                                                    _country = selectionOption
+                                                    expandCountryDd = false
+                                                }
+                                            ) {
+                                                Text(text = selectionOption)
+                                            }
+                                        }
+                                    }
+                                }
+                                Text(
+                                    text = "Country of birth",
+                                    modifier = Modifier
+                                        .fillMaxWidth(),
+                                    fontSize = 15.sp,
+                                    textAlign = TextAlign.Right,
+                                    color = MaterialTheme.myColors.bgHeader)
+                            }
+                        }
+                        Spacer(modifier = Modifier.height(15.dp))
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween,
                         ) {
                             Column(
@@ -90,8 +155,7 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                     .width(percentWidth(.35f))
                             ) {
                                 ExposedDropdownMenuBox(
-                                    modifier = Modifier
-                                        .background(color = MaterialTheme.myColors.main_300),
+                                    modifier = Modifier,
                                     expanded = expandMonthsDd,
                                     onExpandedChange = { expandMonthsDd = !expandMonthsDd }
                                 ) {
@@ -131,7 +195,12 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                         }
                                     }
                                 }
-                                Text(text = "Month")
+                                Text(text = "Month",
+                                    modifier = Modifier
+                                        .fillMaxWidth(),
+                                    fontSize = 15.sp,
+                                    textAlign = TextAlign.Right,
+                                    color = MaterialTheme.myColors.bgHeader)
                             }
                             Spacer(
                                 modifier = Modifier
@@ -143,8 +212,7 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                     .width(percentWidth(.35f))
                             ) {
                                 ExposedDropdownMenuBox(
-                                    modifier = Modifier
-                                        .background(color = MaterialTheme.myColors.main_300),
+                                    modifier = Modifier,
                                     expanded = expandYearDd,
                                     onExpandedChange = { expandYearDd = !expandYearDd }
                                 ) {
@@ -183,13 +251,18 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                         }
                                     }
                                 }
-                                Text(text = "Year")
+                                Text(text = "Year",
+                                    modifier = Modifier
+                                        .fillMaxWidth(),
+                                    fontSize = 15.sp,
+                                    textAlign = TextAlign.Right,
+                                    color = MaterialTheme.myColors.bgHeader)
                             }
                         }
+                        Spacer(modifier = Modifier.height(5.dp))
                         Row(
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .background(color = Color.Green),
+                                .fillMaxWidth(),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             /** Sex picker */
@@ -226,7 +299,11 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                         selected = !_isMale,
                                         onClick = {
                                             _isMale = false
-                                        }
+                                        },
+                                        /*colors = RadioButtonColors.radioColor(
+                                            enabled = MaterialTheme.myColors.bgHeader,
+                                            selected = MaterialTheme.myColors.bgHeader
+                                        )*/
                                     )
                                     Text(
                                         text = "Female",
@@ -244,63 +321,7 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                         }
                         Row(
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .background(color = Color.Red),
-                        ) {
-                            /** Country picker */
-                            Column(
-                                modifier = Modifier
-                                    .width(percentWidth(.76f))
-                                    .background(color = Color.Yellow)
-                            ) {
-                                ExposedDropdownMenuBox(
-                                    modifier = Modifier
-                                        .background(color = MaterialTheme.myColors.main_300),
-                                    expanded = expandCountryDd,
-                                    onExpandedChange = { expandCountryDd = !expandCountryDd }
-                                ) {
-                                    OutlinedTextField(
-                                        value = _country,
-                                        onValueChange = {
-
-                                        },
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .wrapContentHeight(),
-                                        readOnly = true,
-                                        textStyle = Typography.UserInput,
-                                        trailingIcon = {
-                                            ExposedDropdownMenuDefaults.TrailingIcon(
-                                                expanded = expandCountryDd
-                                            )
-                                        },
-                                        colors = CustomModifier.colorsOfDropDown(),
-                                    )
-                                    ExposedDropdownMenu(
-                                        expanded = expandCountryDd,
-                                        onDismissRequest = {
-                                            expandCountryDd = false
-                                        },
-                                    ) {
-                                        dropDownCountries.forEach { selectionOption ->
-                                            DropdownMenuItem(
-                                                onClick = {
-                                                    _country = selectionOption
-                                                    expandCountryDd = false
-                                                }
-                                            ) {
-                                                Text(text = selectionOption)
-                                            }
-                                        }
-                                    }
-                                }
-                                Text(text = "Country of birth")
-                            }
-                        }
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .background(color = Color.Green),
+                                .fillMaxWidth(),
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
                             /** Agreement about smoking checkbox */
@@ -317,7 +338,6 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                             Text(
                                 text = "Yes, I am a smoker",
                                 modifier = Modifier
-                                    .background(color = Color.White)
                                     .clickable(
                                         interactionSource = MutableInteractionSource(),
                                         indication = null
@@ -335,8 +355,7 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                         }
                         Row(
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .background(color = Color.Green),
+                                .fillMaxWidth(),
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.Center,
                         ) {
@@ -358,7 +377,7 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                 })
                         }
                     }
-                    Row(
+                    /*Row(
                         modifier = Modifier
                             .fillMaxHeight()
                             .fillMaxWidth()
@@ -375,8 +394,8 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                         )
                         Spacer(modifier = Modifier.width(percentWidth(.03f)))
                         Text(text = "By clicking this link, the link to the application on the google play will be stored in your clipboard")
-                    }
-                }
+                    }*/
+               // }
             }
         }
     )
