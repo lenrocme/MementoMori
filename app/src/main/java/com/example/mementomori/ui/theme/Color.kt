@@ -32,6 +32,20 @@ val main_000 = Color(0xFF000000)
 var modalTransBground = Color(0xFF575757)
 
 /**
+ * Custom colors
+ * */
+val chart_1 = Color(0xFFE9E8E8)
+val chart_2 = Color(0xFF2EFF27)
+val chart_3 = Color(0xFF00CCBB)
+val chart_4 = Color.Yellow
+val chart_5 = Color(0xFFCACACA)
+val chart_6 = Color(0xFF00C7B0)
+val chart_x = Color(0xFFC73F00)
+val chart_bg_above = Color(0xFF00FFE2)
+val chart_above = Color(0xFF007501)
+//val chart_x = Color(0xFF525252)
+
+/**
  * Font colors light
  * */
 val font_100l = Color(0xFF43649B)
