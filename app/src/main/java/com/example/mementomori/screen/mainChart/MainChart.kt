@@ -1,9 +1,6 @@
 package com.example.mementomori.screen.mainChart
 
-import android.widget.Toast
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CornerSize
@@ -15,11 +12,9 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.currentCompositionLocalContext
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.mementomori.MainViewModel
@@ -29,19 +24,11 @@ import com.example.mementomori.data.const.AgeGroups
 import com.example.mementomori.screen.modal.userDataInput.ModalUserDataInput
 import com.example.mementomori.ui.theme.myColors
 
-/*
-@Preview(showBackground = true)
-@Composable
-fun MainChartPreview() {
-    MainChart(MainViewModel(UserDataViewModel()))
-}
-*/
-
 private const val itemPerRow = 15
 
 @Composable
 fun MainChart(mainVm: MainViewModel) {
-    mainVm.userDataVM.setData(mainVm.userInputVm)
+    mainVm.userDataVM.calc(mainVm.userInputVm)
     Box(modifier = Modifier
         .fillMaxSize(),
         content = {
@@ -57,7 +44,7 @@ fun MainChart(mainVm: MainViewModel) {
                 }) {
                 Icon(
                     imageVector = Icons.Filled.Edit,
-                    contentDescription = "Add"
+                    contentDescription = "Edit"
                 )
             }
             if (mainVm.userInputVm.isModalVisible)
@@ -65,6 +52,7 @@ fun MainChart(mainVm: MainViewModel) {
         }
     )
 }
+
 
 @Composable
 fun Chart(mainVm: MainViewModel) {
@@ -76,49 +64,74 @@ fun Chart(mainVm: MainViewModel) {
             .fillMaxSize()
             .verticalScroll(state),
         content = {
-            for (row in 0 .. mainVm.userDataVM.userLifeExpectation / itemPerRow){
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Start,
-                ){
-                    for (month in 1..itemPerRow){
-                        countMonth++
-                        if(mainVm.userDataVM.userLifeExpectation >= countMonth)
-                            ChartItem(mainVm, countMonth)
+            if (mainVm.userDataVM.userLifeExpectation >= mainVm.userDataVM.userOldMonths) {
+                for (row in 0..mainVm.userDataVM.userLifeExpectation / itemPerRow) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Start,
+                    ) {
+                        for (month in 1..itemPerRow) {
+                            countMonth++
+                            if (mainVm.userDataVM.userLifeExpectation >= countMonth)
+                                ChartItem(mainVm, countMonth, mainVm.userDataVM.userLifeExpectation)
+                        }
                     }
+                    Spacer(Modifier.height(3.dp))
                 }
-                Spacer(Modifier.height(3.dp))
+            }
+            else {
+                for (row in 0 .. mainVm.userDataVM.userOldMonths / itemPerRow){
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Start,
+                    ){
+                        for (month in 1..itemPerRow){
+                            countMonth++
+                            if(mainVm.userDataVM.userOldMonths >= countMonth)
+                                ChartItem(mainVm, countMonth, mainVm.userDataVM.userOldMonths)
+                        }
+                    }
+                    Spacer(Modifier.height(3.dp))
+                }
             }
         })
 }
 
 @Composable
-fun ChartItem(mainVm: MainViewModel, itemMonth: Int) {
-    val sizeItem = 100 / itemPerRow / 100
-    val context = LocalContext.current
+fun ChartItem(mainVm: MainViewModel, itemMonth: Int, countItems: Int) {
     Box(
         modifier = Modifier
-            .background(color = getColorBgForItemByAgeGroup(mainVm.ageGroup, itemMonth)),
-        content = {
-            Icon(
-                modifier = Modifier
-                    .size(percentWidth(1f) / itemPerRow),
-                contentDescription = "Clear",
-                painter = painterResource(id = R.drawable.leaf_svgrepo_com),
-                tint = if (itemMonth % 12 == 0)
-                    Color.Red
+            .size(percentWidth(1f) / itemPerRow)
+            .background(color =  if (
+                itemMonth <= mainVm.userDataVM.userLifeExpectation)
+                    getColorBgForItemByAgeGroup(mainVm.ageGroup, itemMonth)
                 else
-                    Color.Blue,
-            )
-            if (mainVm.userDataVM.userOldMonths > itemMonth) {
+                    MaterialTheme.myColors.chart_bg_above
+            ),
+        content = {
+            if(countItems >= itemMonth) {
                 Icon(
-                    Icons.Default.Clear,
-                    modifier = Modifier
-                        .size(percentWidth(1f) / itemPerRow - 1.dp),
+                    modifier = Modifier,
                     contentDescription = "Clear",
-                    tint = MaterialTheme.myColors.chart_x
+                    painter = painterResource(id = R.drawable.leaf_svgrepo_com),
+                    tint = if (itemMonth % 12 == 0)
+                        Color.Red
+                    else
+                        if (itemMonth > mainVm.userDataVM.userLifeExpectation)
+                            MaterialTheme.myColors.chart_above
+                        else
+                            Color.Blue,
                 )
+                if (mainVm.userDataVM.userOldMonths > itemMonth) {
+                    Icon(
+                        Icons.Default.Clear,
+                        modifier = Modifier,
+                        contentDescription = "Clear",
+                        tint = MaterialTheme.myColors.chart_x
+                    )
+                }
             }
     })
 }

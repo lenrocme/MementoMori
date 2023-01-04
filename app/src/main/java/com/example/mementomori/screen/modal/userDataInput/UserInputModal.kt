@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material3.Surface
@@ -32,10 +33,16 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
     var expandMonthsDd by remember { mutableStateOf(false) }
     var expandYearDd by remember { mutableStateOf(false) }
     var expandCountryDd by remember { mutableStateOf(false) }
-    //var checkedState by remember { mutableStateOf(true) }
     val dropDownMonths = mainVm.dataPick.months
     val dropDownYears = mainVm.dataPick.years
     val dropDownCountries = mainVm.dataPick.countryDict.keys
+
+    /** user imputed data */
+    var _bornYear: String by remember {mutableStateOf(mainVm.userInputVm.bornYear)}
+    var _bornMonth: String by remember {mutableStateOf(mainVm.userInputVm.bornMonth)}
+    var _country: String by remember {mutableStateOf(mainVm.userInputVm.country)}
+    var _isSmoker: Boolean by remember {mutableStateOf(mainVm.userInputVm.isSmoker)}
+    var _isMale: Boolean by remember {mutableStateOf(mainVm.userInputVm.isMale)}
 
     Box(
         modifier = Modifier
@@ -45,7 +52,7 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                 interactionSource = MutableInteractionSource(),
                 indication = null
             ) {
-                mainVm.userInputVm.isModalVisible = !mainVm.userInputVm.isModalVisible
+                mainVm.userInputVm.isModalVisible = false
             },
         contentAlignment = Alignment.Center,
         content = {
@@ -66,7 +73,6 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                 Column() {
                     Column(
                         modifier = Modifier
-                            //.fillMaxHeight()
                             .height(percentHeight(1.0f - .12f * 2))
                             .verticalScroll(rememberScrollState())
                             .padding(horizontal = percentWidth(.06f))
@@ -90,7 +96,8 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                     onExpandedChange = { expandMonthsDd = !expandMonthsDd }
                                 ) {
                                     OutlinedTextField(
-                                        value = mainVm.userInputVm.bornMonth,
+                                        //value = mainVm.userInputVm.bornMonth,
+                                        value = _bornMonth,
                                         onValueChange = {
 
                                         },
@@ -115,9 +122,8 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                         dropDownMonths.forEach { selectionOption ->
                                             DropdownMenuItem(
                                                 onClick = {
-                                                    mainVm.userInputVm.bornMonth = selectionOption
+                                                    _bornMonth = selectionOption
                                                     expandMonthsDd = false
-                                                    mainVm.userDataVM.setData(mainVm.userInputVm)
                                                 }
                                             ) {
                                                 Text(text = selectionOption)
@@ -143,7 +149,7 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                     onExpandedChange = { expandYearDd = !expandYearDd }
                                 ) {
                                     OutlinedTextField(
-                                        value = mainVm.userInputVm.bornYear,
+                                        value = _bornYear,
                                         onValueChange = {
 
                                         },
@@ -168,9 +174,8 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                         dropDownYears.forEach { selectionOption ->
                                             DropdownMenuItem(
                                                 onClick = {
-                                                    mainVm.userInputVm.bornYear = selectionOption
+                                                    _bornYear = selectionOption
                                                     expandYearDd = false
-                                                    mainVm.userDataVM.setData(mainVm.userInputVm)
                                                 }
                                             ) {
                                                 Text(text = selectionOption)
@@ -194,10 +199,9 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                 verticalAlignment = Alignment.CenterVertically,
                                 content = {
                                     RadioButton(
-                                        selected = mainVm.userInputVm.isMale,
+                                        selected = _isMale,
                                         onClick = {
-                                            mainVm.userInputVm.isMale = true
-                                            mainVm.userDataVM.setData(mainVm.userInputVm)
+                                            _isMale = true
                                         }
                                     )
                                     Text(
@@ -206,10 +210,10 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                             .fillMaxWidth()
                                             .clickable(
                                                 interactionSource = MutableInteractionSource(),
-                                                indication = null){
-                                                    mainVm.userInputVm.isMale = true
-                                                    mainVm.userDataVM.setData(mainVm.userInputVm)
-                                                }
+                                                indication = null
+                                            ) {
+                                                _isMale = true
+                                            }
                                     )
                                 }
                             )
@@ -219,10 +223,9 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                 verticalAlignment = Alignment.CenterVertically,
                                 content = {
                                     RadioButton(
-                                        selected = !mainVm.userInputVm.isMale,
+                                        selected = !_isMale,
                                         onClick = {
-                                            mainVm.userInputVm.isMale = false
-                                            mainVm.userDataVM.setData(mainVm.userInputVm)
+                                            _isMale = false
                                         }
                                     )
                                     Text(
@@ -231,10 +234,10 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                             .fillMaxWidth()
                                             .clickable(
                                                 interactionSource = MutableInteractionSource(),
-                                                indication = null){
-                                                    mainVm.userInputVm.isMale = false
-                                                    mainVm.userDataVM.setData(mainVm.userInputVm)
-                                                }
+                                                indication = null
+                                            ) {
+                                                _isMale = false
+                                            }
                                     )
                                 }
                             )
@@ -243,7 +246,6 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .background(color = Color.Red),
-                            //horizontalArrangement = Arrangement.SpaceBetween,
                         ) {
                             /** Country picker */
                             Column(
@@ -258,7 +260,7 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                     onExpandedChange = { expandCountryDd = !expandCountryDd }
                                 ) {
                                     OutlinedTextField(
-                                        value = mainVm.userInputVm.country,
+                                        value = _country,
                                         onValueChange = {
 
                                         },
@@ -283,9 +285,8 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                         dropDownCountries.forEach { selectionOption ->
                                             DropdownMenuItem(
                                                 onClick = {
-                                                    mainVm.userInputVm.country = selectionOption
+                                                    _country = selectionOption
                                                     expandCountryDd = false
-                                                    mainVm.userDataVM.setData(mainVm.userInputVm)
                                                 }
                                             ) {
                                                 Text(text = selectionOption)
@@ -300,15 +301,13 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .background(color = Color.Green),
-                            //horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
                             /** Agreement about smoking checkbox */
                             Checkbox(
-                                checked = mainVm.userInputVm.isSmoker,
+                                checked = _isSmoker,
                                 onCheckedChange = {
-                                    mainVm.userInputVm.isSmoker = it
-                                    mainVm.userDataVM.setData(mainVm.userInputVm)
+                                    _isSmoker = it
                                 },
                                 colors = CheckboxDefaults.colors(
                                     checkedColor = MaterialTheme.myColors.checkedCheckbox,
@@ -324,16 +323,37 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                         indication = null
                                     )
                                     {
-                                        mainVm.userInputVm.isSmoker = !mainVm.userInputVm.isSmoker
-                                        mainVm.userDataVM.setData(mainVm.userInputVm)
+                                        _isSmoker = !_isSmoker
                                     },
                                 style = MaterialTheme.typography.Checkbox,
-                                color = if (mainVm.userInputVm.isSmoker)
+                                color = if (_isSmoker)
                                     MaterialTheme.myColors.fontUnCheckedCheckbox
                                 else
                                     MaterialTheme.myColors.fontCheckedCheckbox
                             )
 
+                        }
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(color = Color.Green),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center,
+                        ) {
+                            Button(
+                                onClick = {
+                                    mainVm.userInputVm.setData(_country, _bornMonth, _bornYear, _isMale, _isSmoker)
+                                    mainVm.userDataVM.calc(mainVm.userInputVm)
+                                    mainVm.userInputVm.isModalVisible = false
+                                },
+                                elevation =  ButtonDefaults.elevation(
+                                    defaultElevation = 10.dp,
+                                    pressedElevation = 15.dp,
+                                    disabledElevation = 0.dp,
+                                ),
+                                content = {
+                                    Text(text = "Save")
+                                })
                         }
                     }
                     Row(
