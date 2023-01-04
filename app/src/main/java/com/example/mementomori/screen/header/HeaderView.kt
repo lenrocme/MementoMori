@@ -130,16 +130,16 @@ private fun HeaderStatsChart(mainVm: MainViewModel) {
         Text(
             modifier = Modifier
                 .fillMaxWidth(),
-            text = "Spent: ${mainVm.userDataVM.userOldMonths} months(Leafs)",
+            text = if (mainVm.userDataVM.aboveAverageLifeExpect <= 0)
+                "Remain: ${mainVm.userDataVM.remainMonths} months(Leafs)"
+            else
+                "Above avg: ${mainVm.userDataVM.aboveAverageLifeExpect}\nYou live already ${mainVm.userDataVM.aboveAverageLifeExpect} months(Leafs) above average",
             style = MaterialTheme.typography.HeaderContainer,
         )
         Text(
             modifier = Modifier
                 .fillMaxWidth(),
-            text = if (mainVm.userDataVM.aboveAverageLifeExpect <= 0)
-                    "Remain: ${mainVm.userDataVM.remainMonths} months(Leafs)"
-                else
-                    "Above avg: ${mainVm.userDataVM.aboveAverageLifeExpect}\nYou live already ${mainVm.userDataVM.aboveAverageLifeExpect} months(Leafs) above average",
+            text = "Spent: ${mainVm.userDataVM.userOldMonths} months(Leafs)",
             style = MaterialTheme.typography.HeaderContainer,
         )
         Text(
