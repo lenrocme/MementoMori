@@ -3,10 +3,7 @@ package com.example.mementomori.screen.header
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
@@ -160,9 +157,13 @@ private fun HeaderStatsChart(mainVm: MainViewModel) {
 
 @Composable
 private fun HeaderInfoChart(mainVm: MainViewModel) {
-    Column() {
+    Column(
+        modifier = Modifier
+            .verticalScroll(rememberScrollState()),
+    ) {
         Spacer(modifier = Modifier.height(10.dp))
         LegendOfChart()
+        Spacer(modifier = Modifier.height(30.dp))
         LegendOfAgeGroup()
         Spacer(modifier = Modifier.height(20.dp))
     }
@@ -278,6 +279,7 @@ private fun LegendOfChart() {
                 style = MaterialTheme.typography.HeaderContainerInfo,
             )
         }
+        Spacer(modifier = Modifier.height(4.dp))
         Row(
             modifier = Modifier
                 .fillMaxWidth(),
@@ -288,6 +290,7 @@ private fun LegendOfChart() {
                     .size(percentWidth(1f) / 14)
                     //.border(BorderStroke(1.dp, MaterialTheme.myColors.chart_x)),
                     .background(color = Color.White),
+                contentAlignment = Alignment.Center,
                 content = {
                     Icon(
                         modifier = Modifier,
@@ -322,14 +325,13 @@ private fun LegendOfAgeGroup() {
         Column(
             modifier = Modifier
                 .width(percentWidth(.75f))
-                .height(percentHeight(.6f))
                 .border(BorderStroke(2.dp, Color.DarkGray))
         ) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(percentHeight(.1f))
-                    .background(color = MaterialTheme.myColors.chart_1),
+                    .background(color = MaterialTheme.myColors.chart_1)
+                    .padding(vertical = 7.dp),
                 contentAlignment = Alignment.Center,
             ) {
                 Column() {
@@ -350,8 +352,8 @@ private fun LegendOfAgeGroup() {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(percentHeight(.1f))
-                    .background(color = MaterialTheme.myColors.chart_2),
+                    .background(color = MaterialTheme.myColors.chart_2)
+                    .padding(vertical = 7.dp),
                 contentAlignment = Alignment.Center,
             ) {
                 Column() {
@@ -372,8 +374,8 @@ private fun LegendOfAgeGroup() {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(percentHeight(.1f))
-                    .background(color = MaterialTheme.myColors.chart_3),
+                    .background(color = MaterialTheme.myColors.chart_3)
+                    .padding(vertical = 7.dp),
                 contentAlignment = Alignment.Center,
             ) {
                 Column() {
@@ -394,8 +396,8 @@ private fun LegendOfAgeGroup() {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(percentHeight(.1f))
-                    .background(color = MaterialTheme.myColors.chart_4),
+                    .background(color = MaterialTheme.myColors.chart_4)
+                    .padding(vertical = 7.dp),
                 contentAlignment = Alignment.Center,
             ) {
                 Column() {
@@ -416,8 +418,8 @@ private fun LegendOfAgeGroup() {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(percentHeight(.1f))
-                    .background(color = MaterialTheme.myColors.chart_5),
+                    .background(color = MaterialTheme.myColors.chart_5)
+                    .padding(vertical = 7.dp),
                 contentAlignment = Alignment.Center,
             ) {
                 Column() {
@@ -438,8 +440,8 @@ private fun LegendOfAgeGroup() {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(percentHeight(.1f))
-                    .background(color = MaterialTheme.myColors.chart_6),
+                    .background(color = MaterialTheme.myColors.chart_6)
+                    .padding(vertical = 7.dp),
                 contentAlignment = Alignment.Center,
             ) {
                 Column() {
