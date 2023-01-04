@@ -4,6 +4,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import com.example.mementomori.data.lastInput.LastInput
+import com.example.mementomori.data.lastInput.LastInputViewModel
 
 class UserInputViewModel: ViewModel() {
     var isModalVisible: Boolean by mutableStateOf(false)
@@ -24,10 +26,29 @@ class UserInputViewModel: ViewModel() {
         isMale: Boolean,
         isSmoker: Boolean
     ) {
-        this.country = country
-        this.bornMonth = bornMonth
-        this.bornYear = bornYear
-        this.isMale = isMale
-        this.isSmoker = isSmoker
+        this.country    = country
+        this.bornMonth  = bornMonth
+        this.bornYear   = bornYear
+        this.isMale     = isMale
+        this.isSmoker   = isSmoker
+    }
+
+    fun getLastInput(): LastInput {
+        return LastInput(
+            id          = 1,
+            country     = this.country,
+            bornMonth   = this.bornMonth,
+            bornYear    = this.bornYear,
+            isMale      = this.isMale,
+            isSmoker    = this.isSmoker
+        )
+    }
+
+    fun setDataByUsingRoom(lastInput: LastInput) {
+        this.country    = lastInput.country
+        this.bornMonth  = lastInput.bornMonth
+        this.bornYear   = lastInput.bornYear
+        this.isMale     = lastInput.isMale
+        this.isSmoker   = lastInput.isSmoker
     }
 }

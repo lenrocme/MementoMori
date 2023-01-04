@@ -5,7 +5,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material3.Surface
@@ -18,6 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.mementomori.MainViewModel
 import com.example.mementomori.R
+import com.example.mementomori.data.lastInput.LastInputViewModel
 import com.example.mementomori.helper.percentHeight
 import com.example.mementomori.helper.percentWidth
 import com.example.mementomori.screen.modifier.CustomModifier
@@ -28,7 +28,7 @@ import com.example.mementomori.ui.theme.myColors
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ModalUserDataInput(mainVm: MainViewModel) {
+fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
     val focusManager = LocalFocusManager.current
     var expandMonthsDd by remember { mutableStateOf(false) }
     var expandYearDd by remember { mutableStateOf(false) }
@@ -345,6 +345,8 @@ fun ModalUserDataInput(mainVm: MainViewModel) {
                                     mainVm.userInputVm.setData(_country, _bornMonth, _bornYear, _isMale, _isSmoker)
                                     mainVm.userDataVM.calc(mainVm.userInputVm)
                                     mainVm.userInputVm.isModalVisible = false
+                                    val lastInput = mainVm.userInputVm.getLastInput()
+                                    mUserForm.update(lastInput) // save to the db
                                 },
                                 elevation =  ButtonDefaults.elevation(
                                     defaultElevation = 10.dp,

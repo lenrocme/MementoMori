@@ -20,6 +20,7 @@ import com.example.mementomori.MainViewModel
 import com.example.mementomori.helper.percentWidth
 import com.example.mementomori.R
 import com.example.mementomori.data.const.AgeGroups
+import com.example.mementomori.data.lastInput.LastInputViewModel
 import com.example.mementomori.screen.header.HeaderView
 import com.example.mementomori.screen.modal.userDataInput.ModalUserDataInput
 import com.example.mementomori.ui.theme.myColors
@@ -28,7 +29,7 @@ private const val itemPerRow = 15
 private val chartPaddingTop = 45.dp
 
 @Composable
-fun MainChart(mainVm: MainViewModel) {
+fun MainChart(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
     mainVm.userDataVM.calc(mainVm.userInputVm)
     Box(modifier = Modifier
         .clickable(
@@ -57,7 +58,7 @@ fun MainChart(mainVm: MainViewModel) {
                 )
             }
             if (mainVm.userInputVm.isModalVisible)
-                ModalUserDataInput(mainVm)
+                ModalUserDataInput(mainVm, mUserForm)
         }
     )
 }
