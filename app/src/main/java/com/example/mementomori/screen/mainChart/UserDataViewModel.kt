@@ -14,11 +14,15 @@ class UserDataViewModel() : ViewModel() {
     var userLifeExpectation: Int by mutableStateOf(900)
     var userLifeExpectationYears: Int by mutableStateOf(75)
     var yearsByCountryAndSex: Double by mutableStateOf(80.0)
+    var aboveAverageLifeExpect: Int by mutableStateOf(0)
+    var remainMonths: Int by mutableStateOf(75)
     private var dataPicker = DataPickDropDown()
 
     fun calc(userInputVm: UserInputViewModel){
         calcLifeExpectation(userInputVm)
         calcActualPositionMonth(userInputVm)
+        this.aboveAverageLifeExpect = this.userOldMonths - this.userLifeExpectation
+        this.remainMonths = this.userLifeExpectation - this.userOldMonths
     }
 
     private fun calcLifeExpectation(userInputVm: UserInputViewModel) {

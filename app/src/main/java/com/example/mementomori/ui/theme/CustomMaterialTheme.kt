@@ -52,6 +52,8 @@ private val DarkColorScheme = CustomColors(
     bgTaxClassSelect = none,
     bg_card = main_300,
     bg_modal = modalTransBground,
+    bgHeader = bgHeader,
+    headerItems = headerItems,
     /**
      * Font colors
      * */
@@ -105,6 +107,8 @@ private val LightColorScheme = CustomColors(
     bgTaxClassSelect = none,
     bg_card = main_300,
     bg_modal = modalTransBground,
+    bgHeader = bgHeader,
+    headerItems = headerItems,
     /**
      * Font colors
      * */
