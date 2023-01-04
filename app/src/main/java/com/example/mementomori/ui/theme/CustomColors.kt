@@ -45,6 +45,7 @@ data class CustomColors(
     val bgTaxClassSelect: Color,
     val bg_card: Color,
     val bg_modal: Color,
+    val bgHeader: Color,
 
     /**
      * Font colors

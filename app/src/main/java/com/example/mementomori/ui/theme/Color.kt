@@ -44,6 +44,7 @@ val chart_x = Color(0xFFC73F00)
 val chart_bg_above = Color(0xFF00FFE2)
 val chart_above = Color(0xFF007501)
 //val chart_x = Color(0xFF525252)
+val bgHeader = Color(0xFF757575)
 
 /**
  * Font colors light
