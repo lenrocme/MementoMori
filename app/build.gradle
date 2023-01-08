@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.mementomori'
+    namespace 'com.malferma.mementomori'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.mementomori"
+        applicationId "com.malferma.mementomori"
         minSdk 21
         targetSdk 33
         versionCode 1
