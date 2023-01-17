@@ -11,10 +11,13 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import com.malferma.mementomori.MainViewModel
 import com.malferma.mementomori.helper.percentWidth
@@ -55,8 +58,17 @@ fun MainChart(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                     contentDescription = "Edit"
                 )
             }
-            if (mainVm.userInputVm.isModalVisible)
-                ModalUserDataInput(mainVm, mUserForm)
+            if (mainVm.userInputVm.isModalVisible) {
+                CompositionLocalProvider(
+                    LocalDensity provides Density(
+                        LocalDensity.current.density,
+                        1f // default font scale instead of system one
+                    )
+                ) {
+                    // Composable that use no-scale
+                    ModalUserDataInput(mainVm, mUserForm)
+                }
+            }
             HeaderView(mainVm)
         }
     )
