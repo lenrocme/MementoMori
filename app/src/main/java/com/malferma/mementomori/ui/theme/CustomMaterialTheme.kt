@@ -44,8 +44,8 @@ private val DarkColorScheme = CustomColors(
     iconButton = none,
     txtIconBtn = none,
     /** Checkbox */
-    checkedCheckbox = none,
-    unCheckedCheckbox = none,
+    checkedCheckbox = main_200,
+    unCheckedCheckbox = main_400,
 
     /** Switch */
     switchThumb = none,
@@ -65,8 +65,8 @@ private val DarkColorScheme = CustomColors(
     fontHeader = none,
     fontLabel = none,
     fontLabelCard = none,
-    fontCheckedCheckbox = none,
-    fontUnCheckedCheckbox = none,
+    fontCheckedCheckbox = main_200,
+    fontUnCheckedCheckbox = main_400,
     fontModal = main_300,
 )
 
@@ -103,8 +103,8 @@ private val LightColorScheme = CustomColors(
     iconButton = none,
     txtIconBtn = none,
     /** Checkbox */
-    checkedCheckbox = none,
-    unCheckedCheckbox = none,
+    checkedCheckbox = bgHeader,
+    unCheckedCheckbox = main_400,
 
     /** Switch */
     switchThumb = none,
@@ -124,8 +124,8 @@ private val LightColorScheme = CustomColors(
     fontHeader = none,
     fontLabel = none,
     fontLabelCard = none,
-    fontCheckedCheckbox = none,
-    fontUnCheckedCheckbox = none,
+    fontCheckedCheckbox = bgHeader,
+    fontUnCheckedCheckbox = main_400,
     fontModal = bgHeader,
 )
 

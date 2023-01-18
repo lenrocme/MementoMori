@@ -344,7 +344,8 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                 },
                                 colors = CheckboxDefaults.colors(
                                     checkedColor = MaterialTheme.myColors.checkedCheckbox,
-                                    uncheckedColor = MaterialTheme.myColors.unCheckedCheckbox
+                                    uncheckedColor = MaterialTheme.myColors.unCheckedCheckbox,
+                                    checkmarkColor = MaterialTheme.myColors.bg_card,
                                 )
                             )
                             Text(
@@ -359,9 +360,9 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                     },
                                 style = MaterialTheme.typography.Checkbox,
                                 color = if (_isSmoker)
-                                    MaterialTheme.myColors.fontUnCheckedCheckbox
-                                else
                                     MaterialTheme.myColors.fontCheckedCheckbox
+                                else
+                                    MaterialTheme.myColors.fontUnCheckedCheckbox
                             )
 
                         }
