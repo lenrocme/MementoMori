@@ -384,6 +384,9 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                     pressedElevation = 15.dp,
                                     disabledElevation = 0.dp,
                                 ),
+                                colors = ButtonDefaults.buttonColors(
+                                    backgroundColor = MaterialTheme.myColors.bgButtonColor,
+                                    contentColor = MaterialTheme.myColors.contentButtonColor),
                                 content = {
                                     Text(text = "Save")
                                 })

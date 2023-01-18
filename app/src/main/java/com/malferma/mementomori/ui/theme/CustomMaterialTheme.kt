@@ -6,13 +6,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.darkColors
 import androidx.compose.ui.graphics.Color
 
 val LocalColors = staticCompositionLocalOf { LightColorScheme }
 
 private val DarkColorScheme = CustomColors(
     none = none,
-    colorScheme = lightColors(),
+    colorScheme = darkColors(),
 
     main_fff = main_fff,
     main_100 = main_100,
@@ -27,6 +28,8 @@ private val DarkColorScheme = CustomColors(
     main_000 = main_000,
 
     /** Custom */
+    bgButtonColor = main_800,
+    contentButtonColor = main_300,
     chart_1 = chart_1,
     chart_2 = chart_2,
     chart_3 = chart_3,
@@ -84,6 +87,8 @@ private val LightColorScheme = CustomColors(
     main_000 = main_000,
 
     /** Custom */
+    bgButtonColor = bgHeader,
+    contentButtonColor = main_300,
     chart_1 = chart_1,
     chart_2 = chart_2,
     chart_3 = chart_3,

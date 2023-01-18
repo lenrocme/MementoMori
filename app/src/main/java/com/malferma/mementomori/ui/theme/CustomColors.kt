@@ -20,6 +20,8 @@ data class CustomColors(
     val main_000: Color,
 
     /** Custom */
+    val bgButtonColor: Color,
+    val contentButtonColor: Color,
     val chart_1: Color,
     val chart_2: Color,
     val chart_3: Color,
