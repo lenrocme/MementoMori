@@ -287,7 +287,11 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                         selected = _isMale,
                                         onClick = {
                                             _isMale = true
-                                        }
+                                        },
+                                        colors = RadioButtonDefaults.colors(
+                                            selectedColor = MaterialTheme.myColors.checkedCheckbox,
+                                            unselectedColor = MaterialTheme.myColors.unCheckedCheckbox
+                                        )
                                     )
                                     Text(
                                         text = "Male",
@@ -298,7 +302,11 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                                 indication = null
                                             ) {
                                                 _isMale = true
-                                            }
+                                            },
+                                        color = if (_isMale)
+                                            MaterialTheme.myColors.fontCheckedCheckbox
+                                        else
+                                            MaterialTheme.myColors.fontUnCheckedCheckbox
                                     )
                                 }
                             )
@@ -312,10 +320,10 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                         onClick = {
                                             _isMale = false
                                         },
-                                        /*colors = RadioButtonColors.radioColor(
-                                            enabled = MaterialTheme.myColors.bgHeader,
-                                            selected = MaterialTheme.myColors.bgHeader
-                                        )*/
+                                        colors = RadioButtonDefaults.colors(
+                                            selectedColor = MaterialTheme.myColors.checkedCheckbox,
+                                            unselectedColor = MaterialTheme.myColors.unCheckedCheckbox
+                                        )
                                     )
                                     Text(
                                         text = "Female",
@@ -326,7 +334,11 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                                 indication = null
                                             ) {
                                                 _isMale = false
-                                            }
+                                            },
+                                        color = if (!_isMale)
+                                            MaterialTheme.myColors.fontCheckedCheckbox
+                                        else
+                                            MaterialTheme.myColors.fontUnCheckedCheckbox
                                     )
                                 }
                             )
