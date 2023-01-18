@@ -29,16 +29,17 @@ object CustomModifier{
 
     @Composable
     fun colorsOfDropDown() = TextFieldDefaults.outlinedTextFieldColors(
-        textColor = MaterialTheme.myColors.bgHeader,
+        textColor = MaterialTheme.myColors.fontModal,
         //disabledTextColor = disabledTextColor,
         backgroundColor = Color.Transparent,
         cursorColor = MaterialTheme.myColors.focusLine,
-        focusedBorderColor = MaterialTheme.myColors.bgHeader,
+        focusedBorderColor = MaterialTheme.myColors.focusLine,
+        unfocusedBorderColor = MaterialTheme.myColors.focusLine,
         //focusedIndicatorColor = MaterialTheme.myColors.focusLine,
         focusedLabelColor = MaterialTheme.myColors.none,
         unfocusedLabelColor = MaterialTheme.myColors.none,
        // unfocusedIndicatorColor = MaterialTheme.myColors.none,
-        trailingIconColor = MaterialTheme.myColors.bgHeader,
+        trailingIconColor = MaterialTheme.myColors.focusLine,
         //errorCursorColor = errorCursorColor,
     )
 }

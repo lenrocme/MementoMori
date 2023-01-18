@@ -65,7 +65,6 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                 modifier = Modifier
                     .wrapContentHeight()
                     .padding(horizontal = percentWidth(.07f), vertical = percentHeight(.07f))
-                    //.background(color = MaterialTheme.myColors.bg_card)
                     .clickable(
                         interactionSource = MutableInteractionSource(),
                         indication = null
@@ -79,6 +78,7 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                         modifier = Modifier
                             //.height(percentHeight(1.0f - .12f * 2))
                             .verticalScroll(rememberScrollState())
+                            .background(color = MaterialTheme.myColors.bg_card)
                             .padding(top = percentWidth(.11f), bottom = percentWidth(.06f))
                             .padding(horizontal = percentWidth(.06f)),
                         verticalArrangement = Arrangement.Center,
@@ -94,7 +94,6 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                             ) {
                                 ExposedDropdownMenuBox(
                                     modifier = Modifier,
-                                        //.background(color = MaterialTheme.myColors.main_300),
                                     expanded = expandCountryDd,
                                     onExpandedChange = { expandCountryDd = !expandCountryDd }
                                 ) {
@@ -117,6 +116,8 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                     )
                                     ExposedDropdownMenu(
                                         expanded = expandCountryDd,
+                                        modifier = Modifier
+                                            .background(color = MaterialTheme.myColors.bg_card_above),
                                         onDismissRequest = {
                                             expandCountryDd = false
                                         },
@@ -128,7 +129,10 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                                     expandCountryDd = false
                                                 }
                                             ) {
-                                                Text(text = selectionOption)
+                                                Text(
+                                                    text = selectionOption,
+                                                    color = MaterialTheme.myColors.fontModal,
+                                                )
                                             }
                                         }
                                     }
@@ -139,7 +143,7 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                         .fillMaxWidth(),
                                     fontSize = 15.sp,
                                     textAlign = TextAlign.Right,
-                                    color = MaterialTheme.myColors.bgHeader)
+                                    color = MaterialTheme.myColors.fontModal)
                             }
                         }
                         Spacer(modifier = Modifier.height(15.dp))
@@ -180,6 +184,8 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                         onDismissRequest = {
                                             expandMonthsDd = false
                                         },
+                                        modifier = Modifier
+                                            .background(color = MaterialTheme.myColors.bg_card_above),
                                     ) {
                                         dropDownMonths.forEach { selectionOption ->
                                             DropdownMenuItem(
@@ -188,7 +194,10 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                                     expandMonthsDd = false
                                                 }
                                             ) {
-                                                Text(text = selectionOption)
+                                                Text(
+                                                    text = selectionOption,
+                                                    color = MaterialTheme.myColors.fontModal,
+                                                )
                                             }
                                         }
                                     }
@@ -198,7 +207,7 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                         .fillMaxWidth(),
                                     fontSize = 15.sp,
                                     textAlign = TextAlign.Right,
-                                    color = MaterialTheme.myColors.bgHeader)
+                                    color = MaterialTheme.myColors.fontModal)
                             }
                             Spacer(
                                 modifier = Modifier
@@ -236,6 +245,8 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                         onDismissRequest = {
                                             expandYearDd = false
                                         },
+                                        modifier = Modifier
+                                            .background(color = MaterialTheme.myColors.bg_card_above),
                                     ) {
                                         dropDownYears.forEach { selectionOption ->
                                             DropdownMenuItem(
@@ -244,7 +255,10 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                                     expandYearDd = false
                                                 }
                                             ) {
-                                                Text(text = selectionOption)
+                                                Text(
+                                                    text = selectionOption,
+                                                    color = MaterialTheme.myColors.fontModal,
+                                                )
                                             }
                                         }
                                     }
@@ -254,7 +268,7 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                         .fillMaxWidth(),
                                     fontSize = 15.sp,
                                     textAlign = TextAlign.Right,
-                                    color = MaterialTheme.myColors.bgHeader)
+                                    color = MaterialTheme.myColors.fontModal)
                             }
                         }
                         Spacer(modifier = Modifier.height(5.dp))
@@ -273,7 +287,11 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                         selected = _isMale,
                                         onClick = {
                                             _isMale = true
-                                        }
+                                        },
+                                        colors = RadioButtonDefaults.colors(
+                                            selectedColor = MaterialTheme.myColors.checkedCheckbox,
+                                            unselectedColor = MaterialTheme.myColors.unCheckedCheckbox
+                                        )
                                     )
                                     Text(
                                         text = "Male",
@@ -284,7 +302,11 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                                 indication = null
                                             ) {
                                                 _isMale = true
-                                            }
+                                            },
+                                        color = if (_isMale)
+                                            MaterialTheme.myColors.fontCheckedCheckbox
+                                        else
+                                            MaterialTheme.myColors.fontUnCheckedCheckbox
                                     )
                                 }
                             )
@@ -298,10 +320,10 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                         onClick = {
                                             _isMale = false
                                         },
-                                        /*colors = RadioButtonColors.radioColor(
-                                            enabled = MaterialTheme.myColors.bgHeader,
-                                            selected = MaterialTheme.myColors.bgHeader
-                                        )*/
+                                        colors = RadioButtonDefaults.colors(
+                                            selectedColor = MaterialTheme.myColors.checkedCheckbox,
+                                            unselectedColor = MaterialTheme.myColors.unCheckedCheckbox
+                                        )
                                     )
                                     Text(
                                         text = "Female",
@@ -312,7 +334,11 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                                 indication = null
                                             ) {
                                                 _isMale = false
-                                            }
+                                            },
+                                        color = if (!_isMale)
+                                            MaterialTheme.myColors.fontCheckedCheckbox
+                                        else
+                                            MaterialTheme.myColors.fontUnCheckedCheckbox
                                     )
                                 }
                             )
@@ -330,7 +356,8 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                 },
                                 colors = CheckboxDefaults.colors(
                                     checkedColor = MaterialTheme.myColors.checkedCheckbox,
-                                    uncheckedColor = MaterialTheme.myColors.unCheckedCheckbox
+                                    uncheckedColor = MaterialTheme.myColors.unCheckedCheckbox,
+                                    checkmarkColor = MaterialTheme.myColors.bg_card,
                                 )
                             )
                             Text(
@@ -345,9 +372,9 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                     },
                                 style = MaterialTheme.typography.Checkbox,
                                 color = if (_isSmoker)
-                                    MaterialTheme.myColors.fontUnCheckedCheckbox
-                                else
                                     MaterialTheme.myColors.fontCheckedCheckbox
+                                else
+                                    MaterialTheme.myColors.fontUnCheckedCheckbox
                             )
 
                         }
@@ -370,6 +397,9 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                     pressedElevation = 15.dp,
                                     disabledElevation = 0.dp,
                                 ),
+                                colors = ButtonDefaults.buttonColors(
+                                    backgroundColor = MaterialTheme.myColors.bgButtonColor,
+                                    contentColor = MaterialTheme.myColors.contentButtonColor),
                                 content = {
                                     Text(text = "Save")
                                 })

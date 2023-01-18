@@ -20,6 +20,8 @@ data class CustomColors(
     val main_000: Color,
 
     /** Custom */
+    val bgButtonColor: Color,
+    val contentButtonColor: Color,
     val chart_1: Color,
     val chart_2: Color,
     val chart_3: Color,
@@ -44,6 +46,7 @@ data class CustomColors(
     val bgTaxClass: Color,
     val bgTaxClassSelect: Color,
     val bg_card: Color,
+    val bg_card_above: Color,
     val bg_modal: Color,
     val bgHeader: Color,
     val headerItems: Color,
@@ -57,6 +60,7 @@ data class CustomColors(
     val fontLabelCard: Color,
     val fontCheckedCheckbox: Color,
     val fontUnCheckedCheckbox: Color,
+    val fontModal: Color,
 ) {
     val primary: Color get() = colorScheme.primary
     val primaryVariant: Color get() = colorScheme.primaryVariant

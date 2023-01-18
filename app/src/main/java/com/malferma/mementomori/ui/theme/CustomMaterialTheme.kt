@@ -6,12 +6,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.darkColors
+import androidx.compose.ui.graphics.Color
 
 val LocalColors = staticCompositionLocalOf { LightColorScheme }
 
 private val DarkColorScheme = CustomColors(
     none = none,
-    colorScheme = lightColors(),
+    colorScheme = darkColors(),
 
     main_fff = main_fff,
     main_100 = main_100,
@@ -26,6 +28,8 @@ private val DarkColorScheme = CustomColors(
     main_000 = main_000,
 
     /** Custom */
+    bgButtonColor = main_800,
+    contentButtonColor = main_300,
     chart_1 = chart_1,
     chart_2 = chart_2,
     chart_3 = chart_3,
@@ -36,12 +40,12 @@ private val DarkColorScheme = CustomColors(
     chart_bg_above = chart_bg_above,
     chart_above = chart_above,
 
-    focusLine = none,
+    focusLine = main_400,
     iconButton = none,
     txtIconBtn = none,
     /** Checkbox */
-    checkedCheckbox = none,
-    unCheckedCheckbox = none,
+    checkedCheckbox = main_200,
+    unCheckedCheckbox = main_400,
 
     /** Switch */
     switchThumb = none,
@@ -49,7 +53,8 @@ private val DarkColorScheme = CustomColors(
 
     bgTaxClass = none,
     bgTaxClassSelect = none,
-    bg_card = main_300,
+    bg_card = main_700,
+    bg_card_above = main_750,
     bg_modal = modalTransBground,
     bgHeader = bgHeader,
     headerItems = headerItems,
@@ -60,8 +65,9 @@ private val DarkColorScheme = CustomColors(
     fontHeader = none,
     fontLabel = none,
     fontLabelCard = none,
-    fontCheckedCheckbox = none,
-    fontUnCheckedCheckbox = none,
+    fontCheckedCheckbox = main_200,
+    fontUnCheckedCheckbox = main_400,
+    fontModal = main_300,
 )
 
 private val LightColorScheme = CustomColors(
@@ -81,6 +87,8 @@ private val LightColorScheme = CustomColors(
     main_000 = main_000,
 
     /** Custom */
+    bgButtonColor = bgHeader,
+    contentButtonColor = main_300,
     chart_1 = chart_1,
     chart_2 = chart_2,
     chart_3 = chart_3,
@@ -91,12 +99,12 @@ private val LightColorScheme = CustomColors(
     chart_bg_above = chart_bg_above,
     chart_above = chart_above,
 
-    focusLine = none,
+    focusLine = main_650,
     iconButton = none,
     txtIconBtn = none,
     /** Checkbox */
-    checkedCheckbox = none,
-    unCheckedCheckbox = none,
+    checkedCheckbox = bgHeader,
+    unCheckedCheckbox = main_400,
 
     /** Switch */
     switchThumb = none,
@@ -104,7 +112,8 @@ private val LightColorScheme = CustomColors(
 
     bgTaxClass = none,
     bgTaxClassSelect = none,
-    bg_card = main_300,
+    bg_card = main_200,
+    bg_card_above = main_100,
     bg_modal = modalTransBground,
     bgHeader = bgHeader,
     headerItems = headerItems,
@@ -115,8 +124,9 @@ private val LightColorScheme = CustomColors(
     fontHeader = none,
     fontLabel = none,
     fontLabelCard = none,
-    fontCheckedCheckbox = none,
-    fontUnCheckedCheckbox = none,
+    fontCheckedCheckbox = bgHeader,
+    fontUnCheckedCheckbox = main_400,
+    fontModal = bgHeader,
 )
 
 @Composable
