@@ -65,7 +65,6 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                 modifier = Modifier
                     .wrapContentHeight()
                     .padding(horizontal = percentWidth(.07f), vertical = percentHeight(.07f))
-                    //.background(color = MaterialTheme.myColors.bg_card)
                     .clickable(
                         interactionSource = MutableInteractionSource(),
                         indication = null
@@ -79,6 +78,7 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                         modifier = Modifier
                             //.height(percentHeight(1.0f - .12f * 2))
                             .verticalScroll(rememberScrollState())
+                            .background(color = MaterialTheme.myColors.bg_card)
                             .padding(top = percentWidth(.11f), bottom = percentWidth(.06f))
                             .padding(horizontal = percentWidth(.06f)),
                         verticalArrangement = Arrangement.Center,
@@ -139,7 +139,7 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                         .fillMaxWidth(),
                                     fontSize = 15.sp,
                                     textAlign = TextAlign.Right,
-                                    color = MaterialTheme.myColors.bgHeader)
+                                    color = MaterialTheme.myColors.fontModal)
                             }
                         }
                         Spacer(modifier = Modifier.height(15.dp))
@@ -198,7 +198,7 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                         .fillMaxWidth(),
                                     fontSize = 15.sp,
                                     textAlign = TextAlign.Right,
-                                    color = MaterialTheme.myColors.bgHeader)
+                                    color = MaterialTheme.myColors.fontModal)
                             }
                             Spacer(
                                 modifier = Modifier
@@ -254,7 +254,7 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                         .fillMaxWidth(),
                                     fontSize = 15.sp,
                                     textAlign = TextAlign.Right,
-                                    color = MaterialTheme.myColors.bgHeader)
+                                    color = MaterialTheme.myColors.fontModal)
                             }
                         }
                         Spacer(modifier = Modifier.height(5.dp))
