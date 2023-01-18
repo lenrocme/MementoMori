@@ -94,7 +94,6 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                             ) {
                                 ExposedDropdownMenuBox(
                                     modifier = Modifier,
-                                        //.background(color = MaterialTheme.myColors.main_300),
                                     expanded = expandCountryDd,
                                     onExpandedChange = { expandCountryDd = !expandCountryDd }
                                 ) {
@@ -117,6 +116,8 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                     )
                                     ExposedDropdownMenu(
                                         expanded = expandCountryDd,
+                                        modifier = Modifier
+                                            .background(color = MaterialTheme.myColors.bg_card_above),
                                         onDismissRequest = {
                                             expandCountryDd = false
                                         },
@@ -128,7 +129,10 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                                     expandCountryDd = false
                                                 }
                                             ) {
-                                                Text(text = selectionOption)
+                                                Text(
+                                                    text = selectionOption,
+                                                    color = MaterialTheme.myColors.fontModal,
+                                                )
                                             }
                                         }
                                     }
@@ -180,6 +184,8 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                         onDismissRequest = {
                                             expandMonthsDd = false
                                         },
+                                        modifier = Modifier
+                                            .background(color = MaterialTheme.myColors.bg_card_above),
                                     ) {
                                         dropDownMonths.forEach { selectionOption ->
                                             DropdownMenuItem(
@@ -188,7 +194,10 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                                     expandMonthsDd = false
                                                 }
                                             ) {
-                                                Text(text = selectionOption)
+                                                Text(
+                                                    text = selectionOption,
+                                                    color = MaterialTheme.myColors.fontModal,
+                                                )
                                             }
                                         }
                                     }
@@ -236,6 +245,8 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                         onDismissRequest = {
                                             expandYearDd = false
                                         },
+                                        modifier = Modifier
+                                            .background(color = MaterialTheme.myColors.bg_card_above),
                                     ) {
                                         dropDownYears.forEach { selectionOption ->
                                             DropdownMenuItem(
@@ -244,7 +255,10 @@ fun ModalUserDataInput(mainVm: MainViewModel, mUserForm: LastInputViewModel) {
                                                     expandYearDd = false
                                                 }
                                             ) {
-                                                Text(text = selectionOption)
+                                                Text(
+                                                    text = selectionOption,
+                                                    color = MaterialTheme.myColors.fontModal,
+                                                )
                                             }
                                         }
                                     }

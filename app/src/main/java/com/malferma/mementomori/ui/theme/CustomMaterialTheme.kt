@@ -37,7 +37,7 @@ private val DarkColorScheme = CustomColors(
     chart_bg_above = chart_bg_above,
     chart_above = chart_above,
 
-    focusLine = none,
+    focusLine = main_400,
     iconButton = none,
     txtIconBtn = none,
     /** Checkbox */
@@ -51,6 +51,7 @@ private val DarkColorScheme = CustomColors(
     bgTaxClass = none,
     bgTaxClassSelect = none,
     bg_card = main_700,
+    bg_card_above = main_750,
     bg_modal = modalTransBground,
     bgHeader = bgHeader,
     headerItems = headerItems,
@@ -93,7 +94,7 @@ private val LightColorScheme = CustomColors(
     chart_bg_above = chart_bg_above,
     chart_above = chart_above,
 
-    focusLine = none,
+    focusLine = main_650,
     iconButton = none,
     txtIconBtn = none,
     /** Checkbox */
@@ -107,6 +108,7 @@ private val LightColorScheme = CustomColors(
     bgTaxClass = none,
     bgTaxClassSelect = none,
     bg_card = main_200,
+    bg_card_above = main_100,
     bg_modal = modalTransBground,
     bgHeader = bgHeader,
     headerItems = headerItems,
