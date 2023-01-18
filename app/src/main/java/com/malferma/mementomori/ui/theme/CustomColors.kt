@@ -57,6 +57,7 @@ data class CustomColors(
     val fontLabelCard: Color,
     val fontCheckedCheckbox: Color,
     val fontUnCheckedCheckbox: Color,
+    val fontModal: Color,
 ) {
     val primary: Color get() = colorScheme.primary
     val primaryVariant: Color get() = colorScheme.primaryVariant

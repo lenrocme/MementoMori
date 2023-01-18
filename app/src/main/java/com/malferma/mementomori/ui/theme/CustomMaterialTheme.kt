@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.material.MaterialTheme
+import androidx.compose.ui.graphics.Color
 
 val LocalColors = staticCompositionLocalOf { LightColorScheme }
 
@@ -49,7 +50,7 @@ private val DarkColorScheme = CustomColors(
 
     bgTaxClass = none,
     bgTaxClassSelect = none,
-    bg_card = main_300,
+    bg_card = main_700,
     bg_modal = modalTransBground,
     bgHeader = bgHeader,
     headerItems = headerItems,
@@ -62,6 +63,7 @@ private val DarkColorScheme = CustomColors(
     fontLabelCard = none,
     fontCheckedCheckbox = none,
     fontUnCheckedCheckbox = none,
+    fontModal = main_300,
 )
 
 private val LightColorScheme = CustomColors(
@@ -104,7 +106,7 @@ private val LightColorScheme = CustomColors(
 
     bgTaxClass = none,
     bgTaxClassSelect = none,
-    bg_card = main_300,
+    bg_card = main_200,
     bg_modal = modalTransBground,
     bgHeader = bgHeader,
     headerItems = headerItems,
@@ -117,6 +119,7 @@ private val LightColorScheme = CustomColors(
     fontLabelCard = none,
     fontCheckedCheckbox = none,
     fontUnCheckedCheckbox = none,
+    fontModal = bgHeader,
 )
 
 @Composable
